@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Pick your order</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    	<link rel="stylesheet" media="all"  
+    	href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
+    	th:href="@{/static/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
+    	<link rel="stylesheet" media="all"  
+    	href="../static/bower_components/css/main.css"
+    	th:href="@{/static/bower_components/css/main.css}" />
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        
+		<div class="container">
+	      <form class="form-signin" th:action="@{/login}" method="post">
+	        <h2 class="form-signin-heading">Please sign in</h2>
+	        <label for="inputEmail" class="sr-only">Email address</label>
+	        <input type="text" name="username" class="form-control" placeholder="Email address"></input>
+	        <label for="inputPassword" class="sr-only">Password</label>
+	        <input type="password" name="password" class="form-control" placeholder="Password"></input>
+	        <div class="checkbox">
+	          <label>
+	            <input type="checkbox" value="remember-me"> Remember me</input>
+	          </label>
+	        </div>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	      </form>
+	
+        </div>
+    </body>
+</html>

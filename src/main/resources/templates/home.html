@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Pick your order</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    	<link rel="stylesheet" media="all"  
+	    	href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	    	th:href="@{/static/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
+    	<link rel="stylesheet" media="all"  
+	    	href="../static/bower_components/css/main.css"
+	    	th:href="@{/static/bower_components/css/main.css}" />
+    </head>
+    <body>
+    	<div class="center-div">
+	        <nav class="navbar navbar-default">
+		        <div class="container">
+		          <div class="navbar-collapse collapse">
+		            <ul class="nav navbar-nav">
+		              <li class="active"><a href="#">Configure users</a></li>
+		              <li><a href="#">Configure products</a></li>
+		              <li><a href="#about">Configure turns</a></li>
+		              <li><a href="#contact">Configure tables</a></li>
+		            </ul>
+		          </div><!--/.nav-collapse -->
+		        </div>
+		    </nav>
+		    <div id="confFrame">
+		    	<div class="jumbotron">
+		        	<h1>Configuration form</h1>
+		        </div>
+		    </div>
+		    
+		    <div class="center-div" id="ordersFrame">
+		    	<div class="row">
+			        <div class="col-md-6">
+			          <table class="table table-striped">
+			            <thead>
+			              <tr>
+			                <th>ID</th>
+			                <th>Table</th>
+			                <th>Type</th>
+			                <th>Status</th>
+			              </tr>
+			            </thead>
+			            <tbody>
+			              <tr>
+			                <td>1</td>
+			                <td>1</td>
+			                <td>Drinks</td>
+			                <td>Delivered</td>
+			              </tr>
+			              <tr>
+			                <td>2</td>
+			                <td>1</td>
+			                <td>Food</td>
+			                <td>Ordered</td>
+			              </tr>
+			              <tr>
+			                <td>3</td>
+			                <td>2</td>
+			                <td>Desserts</td>
+			                <td>Paid</td>
+			              </tr>
+			            </tbody>
+			          </table>
+			        </div>
+		        </div>
+		    </div>
+	    </div>
+    </body>
+</html>
