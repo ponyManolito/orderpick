@@ -2,11 +2,11 @@ package security.orderpick.datamodel;
 
 import java.util.Date;
 
+import security.orderpick.datamodel.common.Entity;
 
-public class User{
+
+public class User extends Entity{
 	
-	int id;
-	Date reg_date;
 	private String name;
 	private String password;
 	public User() {}
@@ -14,14 +14,13 @@ public class User{
 		super();
 		this.name = name;
 		this.password = password;
-		this.reg_date = new Date();
 	}
 	
 	public User(int id, String name, String password, Date reg_date) {
-		this.id=id;
+		setId(id);
 		this.name = name;
 		this.password = password;
-		this.reg_date=reg_date;
+		setReg_date(reg_date);
 	}
 	
 	public String getName() {
@@ -35,22 +34,6 @@ public class User{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Date getReg_date() {
-		return reg_date;
-	}
-
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
 	}
 	
 }
