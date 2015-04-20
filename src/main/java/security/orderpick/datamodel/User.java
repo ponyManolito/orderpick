@@ -35,5 +35,8 @@ public class User extends Entity{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public boolean isNewUser(){
+		return getId()==0;
+	}
 	
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html ng-app="homeApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Pick your order</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -17,7 +17,7 @@
 		        <div class="container">
 		          <div class="navbar-collapse collapse">
 		            <ul class="nav navbar-nav">
-		              <li class="active"><a href="#">Configure users</a></li>
+		              <li class="active"><a ng-click="template='page2'">Configure users</a></li>
 		              <li><a href="#">Configure products</a></li>
 		              <li><a href="#about">Configure turns</a></li>
 		              <li><a href="#contact">Configure tables</a></li>
@@ -25,48 +25,14 @@
 		          </div><!--/.nav-collapse -->
 		        </div>
 		    </nav>
-		    <div id="confFrame">
-		    	<div class="jumbotron">
-		        	<h1>Configuration form</h1>
-		        </div>
-		    </div>
-		    
-		    <div class="center-div" id="ordersFrame">
-		    	<div class="row">
-			        <div class="col-md-6">
-			          <table class="table table-striped">
-			            <thead>
-			              <tr>
-			                <th>ID</th>
-			                <th>Table</th>
-			                <th>Type</th>
-			                <th>Status</th>
-			              </tr>
-			            </thead>
-			            <tbody>
-			              <tr>
-			                <td>1</td>
-			                <td>1</td>
-			                <td>Drinks</td>
-			                <td>Delivered</td>
-			              </tr>
-			              <tr>
-			                <td>2</td>
-			                <td>1</td>
-			                <td>Food</td>
-			                <td>Ordered</td>
-			              </tr>
-			              <tr>
-			                <td>3</td>
-			                <td>2</td>
-			                <td>Desserts</td>
-			                <td>Paid</td>
-			              </tr>
-			            </tbody>
-			          </table>
-			        </div>
-		        </div>
-		    </div>
+		    <div ng-include="'/viewusers'"></div>
 	    </div>
+	    <script src="../static/bower_components/angular/angular.min.js"
+			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
+		<script src="../static/bower_components/js/homeController.js"
+			data-th-href="@{/static/bower_components/js/homeController.js}"></script>
+		<script
+			src="../static/bower_components/angular-utils-pagination/dirPagination.js"
+			data-th-href="@{/static/bower_components/angular-utils-pagination/dirPagination.js}"></script>
     </body>
 </html>

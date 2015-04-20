@@ -1,5 +1,9 @@
-var usersApp = angular.module('usersApp', ['angularUtils.directives.dirPagination']);
-usersApp.controller('userController', function($scope, $http) {
+var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination']);
+homeApp.controller('homeController', function($scope, $http) {
+	//$scope.viewForm = false;
+});
+
+homeApp.controller('userController', function($scope, $http) {
 	$scope.viewForm = false;
 	$scope.icon = "glyphicon glyphicon-plus";
 	$scope.currentPage = 1;
@@ -58,3 +62,4 @@ usersApp.controller('userController', function($scope, $http) {
 		$scope.users = response;
 	});
 });
+

@@ -2,11 +2,13 @@ package security.orderpick.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import security.orderpick.datamodel.User;
 
@@ -32,4 +34,12 @@ public interface UserMapper {
 		@Result(property="reg_date", column="REG_DATE")
 	})
 	public List<User> getAll();
+	
+	@Update("update users set name=#{name}, password=#{password} where id=#{id}")
+	@Options(flushCache=true,useCache=true)
+	public int updateUser(User user);
+	
+	@Delete("delete from users where id=#{id}")
+	@Options(flushCache=true,useCache=true)
+	public int deleteUser(int id);
 }
