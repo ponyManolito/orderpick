@@ -22,12 +22,13 @@
         
 		<div class="container">
 	      <form class="form-signin" th:action="@{/login}" method="post">
-	        <h2 class="form-signin-heading">Please sign in</h2>
-	        <label for="inputEmail" class="sr-only">Email address</label>
-	        <input type="text" name="username" class="form-control" placeholder="Email address"></input>
-	        <label for="inputPassword" class="sr-only">Password</label>
-	        <input type="password" name="password" class="form-control" placeholder="Password"></input>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	        <h2 class="form-signin-heading" th:text="#{login.sign.in}">Please sign in</h2>
+	        <label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
+	        <input type="text" name="username" class="form-control" th:placeholder="#{login.user.name}"></input>
+	        <label for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
+	        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"></input>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" 
+	        	th:text="#{login.button.signin}">Sign in</button>
 	      </form>
 	
         </div>

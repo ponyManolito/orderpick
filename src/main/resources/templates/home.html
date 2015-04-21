@@ -20,11 +20,11 @@
 						<span ng-class="iconHomePlus"></span>
 				    </button>
 		            <ul class="nav navbar-nav">
-		              <li ng-class="tabs[0]"><a ng-click="clickTab(0)">Configure users</a></li>
-		              <li ng-class="tabs[1]"><a ng-click="clickTab(1)">Configure products</a></li>
-		              <li ng-class="tabs[2]"><a ng-click="clickTab(2)">Configure turns</a></li>
-		              <li ng-class="tabs[3]"><a ng-click="clickTab(3)">Configure tables</a></li>
-		              <li ng-class="tabs[4]"><a ng-click="clickTab(4)">Configure payment data</a></li>
+		              <li ng-class="tabs[0]"><a ng-click="clickTab(0)" th:text="#{home.tab.users}">Configure users</a></li>
+		              <li ng-class="tabs[1]"><a ng-click="clickTab(1)" th:text="#{home.tab.products}">Configure products</a></li>
+		              <li ng-class="tabs[2]"><a ng-click="clickTab(2)" th:text="#{home.tab.turns}">Configure turns</a></li>
+		              <li ng-class="tabs[3]"><a ng-click="clickTab(3)" th:text="#{home.tab.tables}">Configure tables</a></li>
+		              <li ng-class="tabs[4]"><a ng-click="clickTab(4)" th:text="#{home.tab.payment}">Configure payment data</a></li>
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		        </div>

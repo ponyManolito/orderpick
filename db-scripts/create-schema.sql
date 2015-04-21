@@ -39,6 +39,7 @@ CREATE TABLE if not exists cf_products (
 	description VARCHAR(100) NOT NULL,
 	image VARCHAR(100),
 	movie VARCHAR(100),
+	empty VARCHAR(1),
 	price double
 );
 

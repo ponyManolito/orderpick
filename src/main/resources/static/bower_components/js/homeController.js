@@ -23,7 +23,7 @@ homeApp.controller('homeController', function($scope, $http) {
 			case 1:$scope.view = "/viewproducts";break;
 			case 2:$scope.view = "/viewturns";break;
 			case 3:$scope.view = "/viewtables";break;
-			case 4:$scope.view = "/viewpaymentdata";break;
+			case 4:$scope.view = "/viewpaymentsdata";break;
 			default:$scope.view = "/viewusers";break;
 		}
     };

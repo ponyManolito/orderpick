@@ -1,9 +1,10 @@
-	<h1>
-		Users <small>Staff's management</small>
+	<h1 th:text="#{users.title.main}">
+		Users 
 	</h1>
-
+	<h1><small th:text="#{users.title.small}">Staff's management</small></h1>
+	
 	<div ng-controller="userController" class="center-div">
-		<button type="button" class="btn btn-default" ng-click="add()">
+		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{users.button.title}">
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
@@ -11,25 +12,27 @@
 				<div class="col-xs-6">
 					<input ng-model="newuser.id" type="hidden" value=""/> 
 					<input class="form-control input-lg" ng-model="newuser.name" type="text"
-						placeholder="User" value="" /> 
+						th:placeholder="#{users.form.user}" value="" /> 
 					<input class="form-control input-lg" ng-model="newuser.password" 
-						type="password" placeholder="Password" value=""/>
-					<button ng-click="addUser()">Save</button>
-					<button ng-click="reset()">Clear</button>
+						type="password" th:placeholder="#{users.form.password}" value=""/>
+					<button ng-click="addUser()" th:text="#{users.form.save}">Save</button>
+					<button ng-click="reset()" th:text="#{users.form.clear}">Clear</button>
 				</div>
 			</form>
 		</div>
 		
 		<div class="row">
 			<div class="col-xs-4">
-				<h4>Users Page: {{ currentPage }}</h4>
+				<h4 th:text="#{users.num.page}">Users Page: {{ currentPage }}</h4>
 			</div>
 			<div class="col-xs-4">
-				<label for="search">Search:</label> <input ng-model="q" id="search"
-					class="form-control" placeholder="Filter text" />
+				<label for="search" th:text="#{users.search}">Search:</label> 
+				<input ng-model="q" id="search"
+					class="form-control" th:placeholder="#{users.filter.text}" />
 			</div>
 			<div class="col-xs-4">
-				<label for="search">items per page:</label> <input type="number"
+				<label for="search" th:text="#{users.items.page}">items per page:</label> 
+				<input type="number"
 					min="1" max="100" class="form-control" ng-model="pageSize" />
 			</div>
 		</div>
@@ -38,10 +41,10 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th class="col-md-1">ID</th>
-							<th class="col-md-4">Name</th>
-							<th class="col-md-4">Password</th>
-							<th class="col-md-2">Options</th>
+							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
+							<th class="col-md-4" th:text="#{users.table.name}">Name</th>
+							<th class="col-md-4" th:text="#{users.table.password}">Password</th>
+							<th class="col-md-2" th:text="#{users.table.options}">Options</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,11 +56,11 @@
 							<td class="col-md-4">{{user.password}}</td>
 							<th class="col-md-2">
 								<button type="button" class="btn btn-default"
-									ng-click="loadUser(user.id)">
+									ng-click="loadUser(user.id)" th:title="#{users.update.title}">
 									<span class="glyphicon glyphicon-floppy-saved"></span>
 								</button>
 								<button type="button" class="btn btn-default"
-									ng-click="deleteUser(user.id)">
+									ng-click="deleteUser(user.id)" th:title="#{users.delete.title}">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</th>
