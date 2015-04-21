@@ -12,20 +12,24 @@
 	    	th:href="@{/static/bower_components/css/main.css}" />
     </head>
     <body>
-    	<div class="center-div">
+    	<div class="center-div" ng-controller="homeController">
 	        <nav class="navbar navbar-default">
 		        <div class="container">
 		          <div class="navbar-collapse collapse">
+		          	<button type="button" class="btn btn-default" ng-click="showConf()">
+						<span ng-class="iconHomePlus"></span>
+				    </button>
 		            <ul class="nav navbar-nav">
-		              <li class="active"><a ng-click="template='page2'">Configure users</a></li>
-		              <li><a href="#">Configure products</a></li>
-		              <li><a href="#about">Configure turns</a></li>
-		              <li><a href="#contact">Configure tables</a></li>
+		              <li ng-class="tabs[0]"><a ng-click="clickTab(0)">Configure users</a></li>
+		              <li ng-class="tabs[1]"><a ng-click="clickTab(1)">Configure products</a></li>
+		              <li ng-class="tabs[2]"><a ng-click="clickTab(2)">Configure turns</a></li>
+		              <li ng-class="tabs[3]"><a ng-click="clickTab(3)">Configure tables</a></li>
+		              <li ng-class="tabs[4]"><a ng-click="clickTab(4)">Configure payment data</a></li>
 		            </ul>
 		          </div><!--/.nav-collapse -->
 		        </div>
 		    </nav>
-		    <div ng-include="'/viewusers'"></div>
+		    <div ng-include="view" ng-show="viewConf"></div>
 	    </div>
 	    <script src="../static/bower_components/angular/angular.min.js"
 			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
