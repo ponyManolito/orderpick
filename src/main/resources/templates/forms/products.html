@@ -1,4 +1,49 @@
 	<h1 th:text="#{products.title.main}">
 		Products 
 	</h1>
-	<h1><small th:text="#{products.title.small}">Product's management</small></h1>
+	<div ng-controller="productsController" class="center-div">
+		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{products.button.title}">
+			<span ng-class="icon"></span>
+		</button>
+		<div class="row" ng-show="viewForm">
+			<form class="form-horizontal well">
+		        <fieldset>
+		          <legend th:text="#{products.form.legend}">Product's management</legend>
+		          <div class="control-group">
+		            <label class="control-label" for="productName" th:text="#{products.form.name}">Name</label>
+		            <div class="controls">
+		              <input type="text" class="form-control input-xlarge" ng-model="newproduct.name" 
+		              		 id="productName" th:placeholder="#{products.form.name}" value="" />
+		            </div>
+		            <label class="control-label" for="emptyProduct" th:text="#{products.form.empty}">Not available</label>
+		            <div class="controls">
+		              <input type="checkbox" id="optionsCheckbox" ng-model="newproduct.empty" value="0" />
+		            </div>
+		            <label class="control-label" for="productDescription" th:text="#{products.form.description}">Description</label>
+		            <div class="controls">
+		            	<textarea class="form-control input-xlarge" id="productDescription" rows="5"
+		            		ng-model="newproduct.description" h:placeholder="#{products.form.description}" value="">
+		            	</textarea>
+		            </div>
+		          </div>
+		          <div class="control-group">
+		            <label class="control-label" for="productImage" th:text="#{products.form.image}">Image</label>
+		            <div class="controls">
+		              <input class="form-control input-file" id="productImage" 
+		              		 ng-model="newproduct.image" type="file" />
+		            </div>
+		            <label class="control-label" for="productMovie" th:text="#{products.form.movie}">Movie</label>
+		            <div class="controls">
+		              <input class="form-control input-file" id="productMovie" 
+		              		 ng-model="newproduct.movie" type="file" />
+		            </div>
+		          </div>
+		          <div class="form-actions">
+		            <button type="button" ng-click="addUser()" class="btn btn-primary" 
+		            		 th:text="#{products.form.save}">Save</button>
+		            <button type="reset" class="btn" th:text="#{products.form.reset}">Reset</button>
+		          </div>
+		        </fieldset>
+		      </form>
+		</div>
+	</div>
