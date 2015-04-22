@@ -1,0 +1,45 @@
+package security.orderpick.dao.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
+import security.orderpick.dao.UserDaoI;
+import security.orderpick.datamodel.User;
+import security.orderpick.mapper.UserMapper;
+
+@Component(UserDaoImpl.name)
+public class UserDaoImpl implements UserDaoI {
+
+	public static final String name = "userDaoImpl";
+
+	@Resource(name = UserMapper.name)
+	private UserMapper userMapper;
+
+	@Override
+	public List<User> getAll() {
+		return userMapper.getAll();
+	}
+
+	@Override
+	public User getUser(int id) {
+		return userMapper.getUser(id);
+	}
+
+	@Override
+	public int addUser(User user) {
+		return user.isNewUser() ? userMapper.addUser(user) : userMapper.updateUser(user);
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return userMapper.updateUser(user);
+	}
+
+	@Override
+	public int deleteUser(int id) {
+		return userMapper.deleteUser(id);
+	}
+}
