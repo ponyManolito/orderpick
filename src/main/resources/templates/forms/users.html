@@ -1,23 +1,27 @@
 	<h1 th:text="#{users.title.main}">
 		Users 
 	</h1>
-	<h1><small th:text="#{users.title.small}">Staff's management</small></h1>
-	
 	<div ng-controller="userController" class="center-div">
 		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{users.button.title}">
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form>
-				<div class="col-xs-6">
-					<input ng-model="newuser.id" type="hidden" value=""/> 
-					<input class="form-control input-lg" ng-model="newuser.name" type="text"
+			<form class="form-horizontal well">
+				<fieldset>
+				<legend th:text="#{users.form.legend}">Staff's management</legend>
+				<div class="control-group">
+					<input ng-model="newuser.id" type="hidden" value="" 
+						 /> 
+					<input class="form-control input-xlarge" ng-model="newuser.name" type="text"
 						th:placeholder="#{users.form.user}" value="" /> 
-					<input class="form-control input-lg" ng-model="newuser.password" 
+					<input class="form-control input-xlarge" ng-model="newuser.password" 
 						type="password" th:placeholder="#{users.form.password}" value=""/>
-					<button ng-click="addUser()" th:text="#{users.form.save}">Save</button>
-					<button ng-click="reset()" th:text="#{users.form.clear}">Clear</button>
+					<div class="form-actions">
+						<button ng-click="addUser()" class="btn btn-primary" th:text="#{users.form.save}">Save</button>
+						<button ng-click="reset()" th:text="#{users.form.clear}">Clear</button>
+					</div>
 				</div>
+				</fieldset>
 			</form>
 		</div>
 		

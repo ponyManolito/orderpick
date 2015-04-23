@@ -13,22 +13,32 @@
     </head>
     <body>
     	<div class="center-div" ng-controller="homeController">
-	        <nav class="navbar navbar-default">
-		        <div class="container">
-		          <div class="navbar-collapse collapse">
-		          	<button type="button" class="btn btn-default" ng-click="showConf()">
-						<span ng-class="iconHomePlus"></span>
-				    </button>
-		            <ul class="nav navbar-nav">
-		              <li ng-class="tabs[0]"><a ng-click="clickTab(0)" th:text="#{home.tab.users}">Configure users</a></li>
-		              <li ng-class="tabs[1]"><a ng-click="clickTab(1)" th:text="#{home.tab.products}">Configure products</a></li>
-		              <li ng-class="tabs[2]"><a ng-click="clickTab(2)" th:text="#{home.tab.turns}">Configure turns</a></li>
-		              <li ng-class="tabs[3]"><a ng-click="clickTab(3)" th:text="#{home.tab.tables}">Configure tables</a></li>
-		              <li ng-class="tabs[4]"><a ng-click="clickTab(4)" th:text="#{home.tab.payment}">Configure payment data</a></li>
-		            </ul>
-		          </div><!--/.nav-collapse -->
+    		 <div class="form-group">
+		        <div class="col-xs-1 selectContainer">
+		        	<button type="button" class="btn btn-default" onclick="window.location='/?language=es';">ES</button>
+		        	<button type="button" class="btn btn-default" onclick="window.location='/?language=en';">EN</button>
 		        </div>
-		    </nav>
+		        <label class="col-xs-1 control-label" th:text="#{home.language}">Language</label>
+	       	 	<span class="glyphicon glyphicon-flag blue" aria-hidden="true"></span>
+		    </div>
+		    <div class="form-group">
+		        <nav class="navbar navbar-default">
+			        <div class="container">
+			          <div class="navbar-collapse collapse">
+			          	<button type="button" class="btn btn-default" ng-click="showConf()">
+							<span ng-class="iconHomePlus"></span>
+					    </button>
+			            <ul class="nav navbar-nav">
+			              <li ng-class="tabs[0]"><a ng-click="clickTab(0)" th:text="#{home.tab.users}">Configure users</a></li>
+			              <li ng-class="tabs[1]"><a ng-click="clickTab(1)" th:text="#{home.tab.products}">Configure products</a></li>
+			              <li ng-class="tabs[2]"><a ng-click="clickTab(2)" th:text="#{home.tab.turns}">Configure turns</a></li>
+			              <li ng-class="tabs[3]"><a ng-click="clickTab(3)" th:text="#{home.tab.tables}">Configure tables</a></li>
+			              <li ng-class="tabs[4]"><a ng-click="clickTab(4)" th:text="#{home.tab.payment}">Configure payment data</a></li>
+			            </ul>
+			          </div><!--/.nav-collapse -->
+			        </div>
+			    </nav>
+		    </div>
 		    <div ng-include="view" ng-show="viewConf"></div>
 	    </div>
 	    <script src="../static/bower_components/angular/angular.min.js"

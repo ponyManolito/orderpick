@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" language="es">
     <head>
         <title>Pick your order</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,7 +19,7 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
-        
+ 
 		<div class="container">
 	      <form class="form-signin" th:action="@{/login}" method="post">
 	        <h2 class="form-signin-heading" th:text="#{login.sign.in}">Please sign in</h2>
