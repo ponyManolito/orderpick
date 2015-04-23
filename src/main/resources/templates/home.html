@@ -16,6 +16,8 @@
     		 <div class="form-group">
 		        <div class="col-xs-1 selectContainer">
 		        	<button type="button" class="btn btn-default" onclick="window.location='/?language=es';">ES</button>
+		        </div>
+		        <div class="col-xs-1 selectContainer">
 		        	<button type="button" class="btn btn-default" onclick="window.location='/?language=en';">EN</button>
 		        </div>
 		        <label class="col-xs-1 control-label" th:text="#{home.language}">Language</label>
@@ -45,6 +47,10 @@
 			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
 		<script src="../static/bower_components/js/homeController.js"
 			data-th-href="@{/static/bower_components/js/homeController.js}"></script>
+		<script src="../static/bower_components/ng-file-upload/angular-file-upload-shim.min.js"
+			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload-shim.min.js}"></script>
+		<script src="../static/bower_components/ng-file-upload/angular-file-upload.min.js"
+			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload.min.js}"></script>
 		<script
 			src="../static/bower_components/angular-utils-pagination/dirPagination.js"
 			data-th-href="@{/static/bower_components/angular-utils-pagination/dirPagination.js}"></script>

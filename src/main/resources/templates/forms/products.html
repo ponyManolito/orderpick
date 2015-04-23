@@ -9,6 +9,7 @@
 			<form class="form-horizontal well">
 		        <fieldset>
 		          <legend th:text="#{products.form.legend}">Product's management</legend>
+		          <input ng-model="newproduct.id" type="hidden" value="" /> 
 		          <div class="control-group">
 		            <div class="controls">
 		              <input type="text" class="form-control input-xlarge" ng-model="newproduct.name" 
@@ -25,11 +26,13 @@
 		            </div>
 		          </div>
 		          <div class="control-group">
-		            <label class="control-label" for="productImage" th:text="#{products.form.image}">Image</label>
-		            <div class="controls">
-		              <input class="form-control input-file" id="productImage" 
-		              		 ng-model="newproduct.image" type="file" />
-		            </div>
+		          	<div ng-file-drop="" ng-file-select="" ng-model="newproduct.image" ng-model-rejected="rejFiles" 
+		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
+		          	ng-multiple="true" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
+						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not available</div>
+						<div ng-show="dropAvailable" th:text="#{products.form.drop}">Drop Images or PDFs</div>
+						<div th:text="#{products.form.click}">click to select</div>
+					</div>
 		            <label class="control-label" for="productMovie" th:text="#{products.form.movie}">Movie</label>
 		            <div class="controls">
 		              <input class="form-control input-file" id="productMovie" 
