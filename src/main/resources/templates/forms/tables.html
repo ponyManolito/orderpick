@@ -1,4 +1,84 @@
 	<h1 th:text="#{tables.title.main}">
 		Tables 
 	</h1>
-	<h1><small th:text="#{tables.title.small}">Table's management</small></h1>
+	<div ng-controller="tableController" class="center-div">
+		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{tables.button.title}">
+			<span ng-class="icon"></span>
+		</button>
+		<div class="row" ng-show="viewForm">
+			<form class="form-horizontal well">
+				<fieldset>
+				<legend th:text="#{tables.form.legend}">Table's management</legend>
+				<div class="control-group">
+					<input ng-model="newtable.id" type="hidden" value="" /> 
+					<input class="form-control input-xlarge" ng-model="newtable.name" type="text"
+						th:placeholder="#{tables.form.name}" value="" /> 
+					<label class="control-label" for="availableTable" th:text="#{tables.form.available}">Available</label>
+		            <div class="controls">
+		              <input type="checkbox" id="optionsCheckbox" ng-model="newtable.available" ng-init="newtable.available=true"  />
+		            </div>
+		            <div class="controls">
+		            	<textarea class="form-control input-xlarge" id="tableDescription" rows="5"
+		            		ng-model="newtable.description" h:placeholder="#{tables.form.description}" value="">
+		            	</textarea>
+		            </div>
+					<div class="form-actions">
+						<button ng-click="addTable()" class="btn btn-primary" th:text="#{tables.form.save}">Save</button>
+						<button ng-click="reset()" th:text="#{tables.form.clear}">Clear</button>
+					</div>
+				</div>
+				</fieldset>
+			</form>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-4">
+				<h4 th:text="#{tables.num.page}">Users Page: {{ currentPage }}</h4>
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.search}">Search:</label> 
+				<input ng-model="q" id="search"
+					class="form-control" th:placeholder="#{users.filter.text}" />
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.items.page}">items per page:</label> 
+				<input type="number"
+					min="1" max="100" class="form-control" ng-model="pageSize" />
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
+							<th class="col-md-2" th:text="#{tables.form.name}">Name</th>
+							<th class="col-md-6" th:text="#{tables.form.description}">Password</th>
+							<th class="col-md-1" th:text="#{tables.form.available}">Available</th>
+							<th class="col-md-2" th:text="#{users.table.options}">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="table in tables | filter:q | itemsPerPage: pageSize"
+							current-page="currentPage">
+							<td class="col-md-1">{{table.id}}</td>
+							<td class="col-md-2">{{table.name}}</td>
+							<td class="col-md-6">{{table.description}}</td>
+							<td class="col-md-1">{{table.available}}</td>
+							<th class="col-md-2">
+								<button type="button" class="btn btn-default"
+									ng-click="loadTable(table.id)" th:title="#{tables.update.title}">
+									<span class="glyphicon glyphicon-floppy-saved"></span>
+								</button>
+								<button type="button" class="btn btn-default"
+									ng-click="deleteTable(table.id)" th:title="#{tables.delete.title}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>

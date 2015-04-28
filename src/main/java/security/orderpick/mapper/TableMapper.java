@@ -20,19 +20,21 @@ public interface TableMapper {
 
 	@Select("SELECT * FROM cf_tables WHERE id = #{id}")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
-			@Result(property = "description", column = "DESCRIPTION")})
+			@Result(property = "description", column = "DESCRIPTION"),
+			@Result(property = "available", column = "AVAILABLE") })
 	public Table getTable(int id);
 
-	@Insert("insert into cf_tables (name, description) values(#{name}, #{description})")
+	@Insert("insert into cf_tables (name, description, available) values(#{name}, #{description}, #{available})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addTable(Table table);
 
 	@Select("SELECT * FROM cf_tables")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
-			@Result(property = "description", column = "DESCRIPTION")})
+			@Result(property = "description", column = "DESCRIPTION"),
+			@Result(property = "available", column = "AVAILABLE") })
 	public List<Table> getAll();
 
-	@Update("update cf_tables set name=#{name}, description=#{description} where id=#{id}")
+	@Update("update cf_tables set name=#{name}, description=#{description}, available=#{available} where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int updateTable(Table table);
 

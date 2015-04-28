@@ -30,7 +30,8 @@ insert into authorities(id_user,id_role) values((select id from users where name
 CREATE TABLE if not exists cf_tables (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(60) NOT NULL,
-	description VARCHAR(100) NOT NULL
+	description VARCHAR(100) NOT NULL,
+	available VARCHAR(1)
 );
 
 CREATE TABLE if not exists cf_products (
