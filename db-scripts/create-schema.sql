@@ -46,8 +46,8 @@ CREATE TABLE if not exists cf_products (
 CREATE TABLE if not exists cf_turns (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	number INT(1) NOT NULL,
-	time_init VARCHAR(5) NOT NULL,
-	time_finish VARCHAR(5) NOT NULL
+	time_init TIME NOT NULL,
+	time_finish TIME NOT NULL
 );
 
 CREATE TABLE if not exists orders (

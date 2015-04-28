@@ -1,4 +1,79 @@
 	<h1 th:text="#{turns.title.main}">
 		Turns
 	</h1>
-	<h1><small th:text="#{turns.title.small}">Turn's management</small></h1>
+	<div ng-controller="turnController" class="center-div">
+		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{turns.button.title}">
+			<span ng-class="icon"></span>
+		</button>
+		<div class="row" ng-show="viewForm">
+			<form class="form-horizontal well">
+				<fieldset>
+				<legend th:text="#{turns.form.legend}">Turn's management</legend>
+				<div class="control-group">
+					<input ng-model="newturn.id" type="hidden" value="" /> 
+					<input class="form-control input-xlarge" ng-model="newturn.number" type="text"
+						th:placeholder="#{turns.form.number}" value="" /> 
+					<input class="form-control input-xlarge" ng-model="newturn.time_init" 
+						type="time" th:placeholder="#{turns.form.time.init}" value=""/>
+					<input class="form-control input-xlarge" ng-model="newturn.time_finish" 
+						type="time" th:placeholder="#{turns.form.time.finish}" value=""/>
+					<div class="form-actions">
+						<button ng-click="addTurn()" class="btn btn-primary" th:text="#{turns.form.save}">Save</button>
+						<button ng-click="reset()" th:text="#{turns.form.clear}">Clear</button>
+					</div>
+				</div>
+				</fieldset>
+			</form>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-4">
+				<h4 th:text="#{users.num.page}">Users Page: {{ currentPage }}</h4>
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.search}">Search:</label> 
+				<input ng-model="q" id="search"
+					class="form-control" th:placeholder="#{users.filter.text}" />
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.items.page}">items per page:</label> 
+				<input type="number"
+					min="1" max="100" class="form-control" ng-model="pageSize" />
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
+							<th class="col-md-2" th:text="#{turns.form.number}">Number</th>
+							<th class="col-md-3" th:text="#{turns.table.init}">Init time</th>
+							<th class="col-md-3" th:text="#{turns.table.end}">End time</th>
+							<th class="col-md-2" th:text="#{users.table.options}">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="turn in turns | filter:q | itemsPerPage: pageSize"
+							current-page="currentPage">
+							<td class="col-md-1">{{turn.id}}</td>
+							<td class="col-md-2">{{turn.number}}</td>
+							<td class="col-md-3">{{turn.time_init}}</td>
+							<td class="col-md-3">{{turn.time_finish}}</td>
+							<th class="col-md-2">
+								<button type="button" class="btn btn-default"
+									ng-click="loadTurn(turn.id)" th:title="#{turns.update.title}">
+									<span class="glyphicon glyphicon-floppy-saved"></span>
+								</button>
+								<button type="button" class="btn btn-default"
+									ng-click="deleteTurn(turn.id)" th:title="#{turns.delete.title}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>

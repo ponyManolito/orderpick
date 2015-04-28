@@ -1,5 +1,4 @@
-var usersApp = angular.module('usersApp', ['angularUtils.directives.dirPagination']);
-usersApp.controller('userController', function($scope, $http) {
+homeApp.controller('userController', function($scope, $http) {
 	$scope.viewForm = false;
 	$scope.icon = "glyphicon glyphicon-plus";
 	$scope.currentPage = 1;
