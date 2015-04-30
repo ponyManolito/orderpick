@@ -46,4 +46,9 @@ public class TablesController {
 	public int deleteTable(@PathVariable(value = "id") int id) {
 		return tableDao.deleteTable(id);
 	}
+	
+	@RequestMapping(method = { RequestMethod.POST }, value = "/assignTable", produces = "application/json")
+	public int assignTable(@RequestParam(value = "name") String name, @RequestParam(value = "description") String description) {
+		return tableDao.assignTable(name, description);
+	}
 }

@@ -42,4 +42,25 @@ public class TableDaoImpl implements TableDaoI {
 	public int deleteTable(int id) {
 		return tableMapper.deleteTable(id);
 	}
+	
+	@Override
+	public int assignTable(String name, String description) {
+		Table table = tableMapper.getTableByName(name);
+		if (table != null) {
+			table = tableMapper.getTableIfAvailable(name);
+			if (table != null) {
+				description.replace("+", " ");
+				table.setDescription(description);
+				table.setAvailable(false);
+				tableMapper.updateTable(table);
+				return 0;
+			} else {
+				// Table not available
+				return 2;
+			}
+		} else {
+			// Table not found
+			return 1;
+		}
+	}
 }

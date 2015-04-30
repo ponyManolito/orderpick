@@ -23,6 +23,18 @@ public interface TableMapper {
 			@Result(property = "description", column = "DESCRIPTION"),
 			@Result(property = "available", column = "AVAILABLE") })
 	public Table getTable(int id);
+	
+	@Select("SELECT * FROM cf_tables WHERE name = #{name}")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "description", column = "DESCRIPTION"),
+			@Result(property = "available", column = "AVAILABLE") })
+	public Table getTableByName(String name);
+	
+	@Select("SELECT * FROM cf_tables WHERE name = #{name} and available = 1")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "description", column = "DESCRIPTION"),
+			@Result(property = "available", column = "AVAILABLE") })
+	public Table getTableIfAvailable(String name);
 
 	@Insert("insert into cf_tables (name, description, available) values(#{name}, #{description}, #{available})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")

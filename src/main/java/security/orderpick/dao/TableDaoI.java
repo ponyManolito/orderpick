@@ -15,4 +15,6 @@ public interface TableDaoI {
 	public int updateTable(Table table);
 
 	public int deleteTable(int id);
+	
+	public int assignTable(String name, String description);
 }
