@@ -6,13 +6,13 @@
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form class="form-horizontal well">
+			<form class="form-horizontal well" name="formTable">
 				<fieldset>
 				<legend th:text="#{tables.form.legend}">Table's management</legend>
 				<div class="control-group">
 					<input ng-model="newtable.id" type="hidden" value="" /> 
 					<input class="form-control input-xlarge" ng-model="newtable.name" type="text"
-						th:placeholder="#{tables.form.name}" value="" /> 
+						th:placeholder="#{tables.form.name}" value="" ng-required="true"/> 
 					<label class="control-label" for="availableTable" th:text="#{tables.form.available}">Available</label>
 		            <div class="controls">
 		              <input type="checkbox" id="optionsCheckbox" ng-model="newtable.available" ng-init="newtable.available=true"  />
@@ -23,7 +23,8 @@
 		            	</textarea>
 		            </div>
 					<div class="form-actions">
-						<button ng-click="addTable()" class="btn btn-primary" th:text="#{tables.form.save}">Save</button>
+						<button ng-click="addTable()" class="btn btn-primary" ng-disabled="formTable.$invalid" 
+							th:text="#{tables.form.save}">Save</button>
 						<button ng-click="reset()" th:text="#{tables.form.clear}">Clear</button>
 					</div>
 				</div>
