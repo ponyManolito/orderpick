@@ -16,5 +16,5 @@ public interface TableDaoI {
 
 	public int deleteTable(int id);
 	
-	public int assignTable(String name, String description);
+	public boolean assignTable(String name, String description) throws Exception;
 }

@@ -44,23 +44,23 @@ public class TableDaoImpl implements TableDaoI {
 	}
 	
 	@Override
-	public int assignTable(String name, String description) {
+	public boolean assignTable(String name, String description) throws Exception {
 		Table table = tableMapper.getTableByName(name);
 		if (table != null) {
 			table = tableMapper.getTableIfAvailable(name);
 			if (table != null) {
-				description.replace("+", " ");
+				description = description.replace("+", " ");
 				table.setDescription(description);
 				table.setAvailable(false);
 				tableMapper.updateTable(table);
-				return 0;
+				return true;
 			} else {
 				// Table not available
-				return 2;
+				throw new Exception("Mesa ya asignada");
 			}
 		} else {
 			// Table not found
-			return 1;
+			throw new Exception("Numero de mesa no existente");
 		}
 	}
 }
