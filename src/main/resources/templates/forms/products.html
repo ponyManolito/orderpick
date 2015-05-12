@@ -6,7 +6,7 @@
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form class="form-horizontal well">
+			<form class="form-horizontal well" enctype="multipart/form-data">
 		        <fieldset>
 		          <legend th:text="#{products.form.legend}">Product's management</legend>
 		          <input ng-model="newproduct.id" type="hidden" value="" /> 
@@ -33,6 +33,13 @@
 						<div ng-show="dropAvailable" th:text="#{products.form.drop}">Drop Images or PDFs</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
+					<div class="preview">
+						<div>Preview image:</div>
+						<img style="max-width:300px" ngf-src="newproduct.image[0]" 
+							ng-show="newproduct.image[0].type.indexOf('image') > -1"/>
+					</div>
+				  </div>
+				  <div class="form-group">
 					<div ng-file-drop="" ng-file-select="" ng-model="newproduct.movie" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
 		          	ng-multiple="false" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
@@ -40,8 +47,10 @@
 						<div ng-show="dropAvailable" th:text="#{products.form.drop.movie}">Drop videos</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
-					<div id="imageName"></div>
-					<div id="movieName"></div>
+					<div class="preview">
+						<div>Preview image/audio/video:</div>
+						<video controls="" ngf-src="newproduct.movie" ng-show="newproduct.movie.type.indexOf('video') > -1"></video>
+					</div>
 		          </div>
 		          <div class="form-actions">
 		            <button type="button" ng-click="addProduct()" class="btn btn-primary" 

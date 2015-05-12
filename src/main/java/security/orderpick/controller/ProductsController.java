@@ -1,5 +1,6 @@
 package security.orderpick.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import security.orderpick.dao.ProductDaoI;
 import security.orderpick.dao.impl.ProductDaoImpl;
 import security.orderpick.datamodel.Product;
+import security.orderpick.util.Converter;
 
 @RestController
 @RequestMapping("/products")
@@ -21,6 +23,9 @@ public class ProductsController {
 
 	@Resource(name = ProductDaoImpl.name)
 	private ProductDaoI productDao;
+	
+	@Resource(name = Converter.name)
+	private Converter converter;
 
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getall", produces = "application/json")
 	public List<Product> getAll() {
@@ -33,13 +38,13 @@ public class ProductsController {
 	}
 
 	@RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces = "application/json")
-	public int addProduct(@RequestBody Product product) {
-		return productDao.addProduct(product);
+	public int addProduct(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
+		return productDao.addProduct(converter.converterProduct(product));
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")
-	public int updateUser(@RequestBody Product product) {
-		return productDao.updateProduct(product);
+	public int updateUser(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
+		return productDao.updateProduct(converter.converterProduct(product));
 	}
 
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/deleteproduct/{id}", produces = "application/json")
