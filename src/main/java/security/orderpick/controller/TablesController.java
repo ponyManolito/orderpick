@@ -51,4 +51,9 @@ public class TablesController {
 	public boolean assignTable(@RequestParam(value = "name") String name, @RequestParam(value = "description") String description) throws Exception {
 		return tableDao.assignTable(name, description);
 	}
+	
+	@RequestMapping(method = { RequestMethod.POST }, value = "/unassignTable", produces = "application/json")
+	public boolean unassignTable(@RequestParam(value = "name") String name) {
+		return tableDao.unassignTable(name);
+	}
 }
