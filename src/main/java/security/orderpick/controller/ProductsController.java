@@ -6,11 +6,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import security.orderpick.dao.ProductDaoI;
 import security.orderpick.dao.impl.ProductDaoImpl;
@@ -23,7 +23,7 @@ public class ProductsController {
 
 	@Resource(name = ProductDaoImpl.name)
 	private ProductDaoI productDao;
-	
+
 	@Resource(name = Converter.name)
 	private Converter converter;
 
@@ -37,9 +37,20 @@ public class ProductsController {
 		return productDao.getProduct(id);
 	}
 
+	/*
+	 * @RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces =
+	 * "application/json") public int addProduct(@RequestBody security.orderpick.viewmodel.Product
+	 * product) throws IOException { return
+	 * productDao.addProduct(converter.converterProduct(product)); }
+	 */
+
 	@RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces = "application/json")
-	public int addProduct(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
-		return productDao.addProduct(converter.converterProduct(product));
+	public int addProduct(@RequestParam(value = "name") String name,
+			@RequestParam(value = "description") String description, @RequestParam(value = "empty") Boolean empty,
+			@RequestParam(value = "image", required = false) MultipartFile image,
+			@RequestParam(value = "movie", required = false) MultipartFile movie) throws IOException {
+		System.out.println("name " + name + ", description " + description);
+		return 1;
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")

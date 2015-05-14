@@ -15,15 +15,13 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.icon = "glyphicon glyphicon-plus";
     	var isNewProduct = $scope.newproduct.id==""||$scope.newproduct.id=="0";
     	var fd = new FormData();
-    	fd.append('product', $scope.newproduct);
-    	/*fd.append('name', $scope.newproduct.name);
+    	//fd.append('product', JSON.stringify($scope.newproduct));
+    	fd.append('name', $scope.newproduct.name);
     	fd.append('description', $scope.newproduct.description);
-    	if($scope.newproduct.image){
-    		fd.append('image', $scope.newproduct.image);
-    	}
-    	if($scope.newproduct.movie){
-    		fd.append('movie', $scope.newproduct.movie);
-    	}
+		fd.append('image', $scope.newproduct.image?$scope.newproduct.image[0]:null);	
+    	fd.append('movie', $scope.newproduct.movie?$scope.newproduct.movie[0]:null);
+		fd.append('empty', $scope.newproduct.empty?true:false );
+    	/*
     	alert($scope.newproduct.name)*/
         $http.post("/products/addproduct",fd, {
             transformRequest: angular.identity,

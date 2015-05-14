@@ -33,10 +33,9 @@
 						<div ng-show="dropAvailable" th:text="#{products.form.drop}">Drop Images or PDFs</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
-					<div class="preview">
-						<div>Preview image:</div>
-						<img style="max-width:300px" ngf-src="newproduct.image[0]" 
-							ng-show="newproduct.image[0].type.indexOf('image') > -1"/>
+					<div class="preview" ng-show="newproduct.image[0].type.indexOf('image') > -1">
+						<div>Preview</div>
+						<div>{{newproduct.image[0].name}}</div>
 					</div>
 				  </div>
 				  <div class="form-group">
