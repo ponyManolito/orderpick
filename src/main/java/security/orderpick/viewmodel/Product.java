@@ -13,7 +13,9 @@ public class Product extends Entity {
 	private MultipartFile image;
 
 	private MultipartFile movie;
-
+	
+	private Double price;
+	
 	private boolean empty;
 
 	public Product() {}
@@ -56,6 +58,14 @@ public class Product extends Entity {
 
 	public void setEmpty(boolean empty) {
 		this.empty = empty;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public boolean isNewProduct() {

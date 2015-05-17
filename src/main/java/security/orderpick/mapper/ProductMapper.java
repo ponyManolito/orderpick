@@ -22,10 +22,11 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
 	public Product getProduct(int id);
 
-	@Insert("insert into cf_products (name, description, image, movie, empty) values(#{name}, #{description}, #{image}, #{movie}, #{empty})")
+	@Insert("insert into cf_products (name, description, image, movie, empty, price) "
+			+ "values(#{name}, #{description}, #{image}, #{movie}, #{empty}, #{price})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addProduct(Product product);
 
@@ -33,10 +34,11 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
 	public List<Product> getAll();
 
-	@Update("update cf_products set name=#{name}, description=#{description}, image=#{image}, movie=#{movie}, empty=#{empty} where id=#{id}")
+	@Update("update cf_products set name=#{name}, description=#{description}, "
+			+ "image=#{image}, movie=#{movie}, empty=#{empty}, price=#{price} where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int updateProduct(Product product);
 

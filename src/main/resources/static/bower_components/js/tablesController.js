@@ -40,7 +40,7 @@ homeApp.controller('tableController', function($scope, $http) {
     	$scope.newtable.name="";
     	$scope.newtable.description="";
     }
-    $scope.deleteUser = function(index) {
+    $scope.deleteTable = function(index) {
     	var r = confirm("Are you sure that you want to remove?");
     	if (r){
 	        $http.delete("/tables/deletetable/"+index).success(function(response) {

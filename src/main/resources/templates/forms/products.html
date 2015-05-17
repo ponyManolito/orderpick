@@ -6,14 +6,16 @@
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form class="form-horizontal well" enctype="multipart/form-data">
+			<form class="form-horizontal well" enctype="multipart/form-data" name="formProduct">
 		        <fieldset>
 		          <legend th:text="#{products.form.legend}">Product's management</legend>
 		          <input ng-model="newproduct.id" type="hidden" value="" /> 
 		          <div class="form-group">
 		            <div class="controls">
 		              <input type="text" class="form-control input-xlarge" ng-model="newproduct.name" 
-		              		 id="productName" th:placeholder="#{products.form.name}" value="" />
+		              		 id="productName" th:placeholder="#{products.form.name}" value="" ng-required="true"/>
+		              <input type="number" class="form-control input-xlarge" ng-model="newproduct.price" 
+		              		 id="productPrice" th:placeholder="#{products.form.Price}" value="" ng-required="true"/>
 		            </div>
 		            <label class="control-label" for="emptyProduct" th:text="#{products.form.empty}">Not available</label>
 		            <div class="controls">
@@ -34,29 +36,81 @@
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
 					<div class="preview" ng-show="newproduct.image[0].type.indexOf('image') > -1">
-						<div>Preview</div>
+						<div th:text="#{products.image.name}">Image name</div>
 						<div>{{newproduct.image[0].name}}</div>
 					</div>
 				  </div>
 				  <div class="form-group">
 					<div ng-file-drop="" ng-file-select="" ng-model="newproduct.movie" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
-		          	ng-multiple="false" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
+		          	ng-multiple="false" allow-dir="true" ng-accept="'video/*'" drop-available="dropAvailable">
 						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not available</div>
 						<div ng-show="dropAvailable" th:text="#{products.form.drop.movie}">Drop videos</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
-					<div class="preview">
-						<div>Preview image/audio/video:</div>
-						<video controls="" ngf-src="newproduct.movie" ng-show="newproduct.movie.type.indexOf('video') > -1"></video>
+					<div class="preview" ng-show="newproduct.movie[0].type.indexOf('video') > -1">
+						<div th:text="#{products.movie.name}">Movie name</div>
+						<div>{{newproduct.movie[0].name}}</div>
 					</div>
 		          </div>
-		          <div class="form-actions">
-		            <button type="button" ng-click="addProduct()" class="btn btn-primary" 
+		          <div class="form-actions" >
+		            <button type="button" ng-click="addProduct()" class="btn btn-primary" ng-disabled="formProduct.$invalid"
 		            		 th:text="#{products.form.save}">Save</button>
 		            <button type="reset" class="btn" th:text="#{products.form.reset}">Reset</button>
 		          </div>
 		        </fieldset>
 		      </form>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<h4 th:text="#{products.num.page}">Products Page: {{ currentPage }}</h4>
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.search}">Search:</label> 
+				<input ng-model="q" id="search"
+					class="form-control" th:placeholder="#{users.filter.text}" />
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.items.page}">items per page:</label> 
+				<input type="number"
+					min="1" max="100" class="form-control" ng-model="pageSize" />
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
+							<th class="col-md-2" th:text="#{tables.form.name}">Name</th>
+							<th class="col-md-5" th:text="#{tables.form.description}">Description</th>
+							<th class="col-md-1" th:text="#{products.form.empty}">Empty</th>
+							<th class="col-md-1" th:text="#{products.form.Price}">Precio</th>
+							<th class="col-md-3" th:text="#{users.table.options}">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="product in products | filter:q | itemsPerPage: pageSize"
+							current-page="currentPage">
+							<td class="col-md-1">{{product.id}}</td>
+							<td class="col-md-2">{{product.name}}</td>
+							<td class="col-md-5">{{product.description}}</td>
+							<td class="col-md-1">{{product.empty}}</td>
+							<td class="col-md-1">{{product.price}}</td>
+							<th class="col-md-3">
+								<button type="button" class="btn btn-default"
+									ng-click="loadProduct(product.id)" th:title="#{tables.update.title}">
+									<span class="glyphicon glyphicon-floppy-saved"></span>
+								</button>
+								<button type="button" class="btn btn-default"
+									ng-click="deleteProduct(product.id)" th:title="#{tables.delete.title}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>

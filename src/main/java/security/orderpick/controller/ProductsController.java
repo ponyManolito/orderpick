@@ -45,12 +45,12 @@ public class ProductsController {
 	 */
 
 	@RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces = "application/json")
-	public int addProduct(@RequestParam(value = "name") String name,
-			@RequestParam(value = "description") String description, @RequestParam(value = "empty") Boolean empty,
+	public int addProduct(@RequestParam(value = "id", required = false) String id, 
+			@RequestParam(value = "name") String name,@RequestParam(value = "description") String description,
+			@RequestParam(value = "price") String price, @RequestParam(value = "empty") Boolean empty,
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam(value = "movie", required = false) MultipartFile movie) throws IOException {
-		System.out.println("name " + name + ", description " + description);
-		return 1;
+		return productDao.addProduct(converter.converterProduct(id,name,description,empty,price,image,movie));
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")

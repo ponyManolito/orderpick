@@ -9,6 +9,8 @@ public class Product extends Entity {
 	private String description;
 
 	private String image;
+	
+	private double price;
 
 	private String movie;
 
@@ -16,13 +18,15 @@ public class Product extends Entity {
 
 	public Product() {}
 
-	public Product(String name, String description, String image, String movie, boolean empty) {
+	public Product(String name, String description, String image, double price, 
+				   String movie, boolean empty) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.movie = movie;
 		this.empty = empty;
+		this.price = price;
 	}
 
 	public String getName() {
@@ -63,6 +67,14 @@ public class Product extends Entity {
 
 	public void setEmpty(boolean empty) {
 		this.empty = empty;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public boolean isNewProduct() {
