@@ -6,17 +6,18 @@
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form class="form-horizontal well">
+			<form class="form-horizontal well" name="formUser">
 				<fieldset>
 				<legend th:text="#{users.form.legend}">Staff's management</legend>
 				<div class="control-group">
 					<input ng-model="newuser.id" type="hidden" value="" /> 
 					<input class="form-control input-xlarge" ng-model="newuser.name" type="text"
-						th:placeholder="#{users.form.user}" value="" /> 
+						th:placeholder="#{users.form.user}" value="" ng-required="true"/> 
 					<input class="form-control input-xlarge" ng-model="newuser.password" 
-						type="password" th:placeholder="#{users.form.password}" value=""/>
+						type="password" th:placeholder="#{users.form.password}" value="" ng-required="true"/>
 					<div class="form-actions">
-						<button ng-click="addUser()" class="btn btn-primary" th:text="#{users.form.save}">Save</button>
+						<button ng-click="addUser()" class="btn btn-primary" th:text="#{users.form.save}"
+						ng-disabled="formUser.$invalid">Save</button>
 						<button ng-click="reset()" th:text="#{users.form.clear}">Clear</button>
 					</div>
 				</div>
@@ -56,7 +57,7 @@
 							current-page="currentPage">
 							<td class="col-md-1">{{user.id}}</td>
 							<td class="col-md-4">{{user.name}}</td>
-							<td class="col-md-4">{{user.password}}</td>
+							<td class="col-md-4">*******</td>
 							<th class="col-md-2">
 								<button type="button" class="btn btn-default"
 									ng-click="loadUser(user.id)" th:title="#{users.update.title}">

@@ -6,19 +6,20 @@
 			<span ng-class="icon"></span>
 		</button>
 		<div class="row" ng-show="viewForm">
-			<form class="form-horizontal well">
+			<form class="form-horizontal well" name="formTurn">
 				<fieldset>
 				<legend th:text="#{turns.form.legend}">Turn's management</legend>
 				<div class="control-group">
 					<input ng-model="newturn.id" type="hidden" value="" /> 
 					<input class="form-control input-xlarge" ng-model="newturn.number" type="text"
-						th:placeholder="#{turns.form.number}" value="" /> 
+						th:placeholder="#{turns.form.number}" value="" ng-required="true" /> 
 					<input class="form-control input-xlarge" ng-model="newturn.time_init" 
-						type="time" th:placeholder="#{turns.form.time.init}" value=""/>
+						type="time" th:placeholder="#{turns.form.time.init}" value="" ng-required="true"/>
 					<input class="form-control input-xlarge" ng-model="newturn.time_finish" 
-						type="time" th:placeholder="#{turns.form.time.finish}" value=""/>
+						type="time" th:placeholder="#{turns.form.time.finish}" value="" ng-required="true"/>
 					<div class="form-actions">
-						<button ng-click="addTurn()" class="btn btn-primary" th:text="#{turns.form.save}">Save</button>
+						<button ng-click="addTurn()" class="btn btn-primary" th:text="#{turns.form.save}"
+							ng-disabled="formTurn.$invalid">Save</button>
 						<button ng-click="reset()" th:text="#{turns.form.clear}">Clear</button>
 					</div>
 				</div>

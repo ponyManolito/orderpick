@@ -22,8 +22,8 @@ homeApp.controller('userController', function($scope, $http) {
     $scope.addUser = function() {
     	$scope.viewForm = false;
     	$scope.icon = "glyphicon glyphicon-plus";
-    	var isNewUser = $scope.user.id==""||$scope.user.id=="0";
-        $http.post("/users/adduser",$scope.user).success(function(response) {
+    	var isNewUser = $scope.newuser.id==""||$scope.newuser.id=="0";
+        $http.post("/users/adduser",$scope.newuser).success(function(response) {
     		$http.get("/users/getall").success(function(response) {
     			$scope.users = response;
     		});

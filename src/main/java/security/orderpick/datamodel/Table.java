@@ -35,7 +35,7 @@ public class Table extends Entity {
 		this.description = description;
 	}
 
-	public boolean isAvailable() {
+	public boolean getAvailable() {
 		return available;
 	}
 
