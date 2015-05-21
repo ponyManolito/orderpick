@@ -3,6 +3,8 @@ homeApp.controller('userController', function($scope, $http) {
 	$scope.icon = "glyphicon glyphicon-plus";
 	$scope.currentPage = 1;
 	$scope.pageSize = 5;
+	$scope.messageSuccess = "";
+	$scope.messageError = "";
 	$scope.add = function() {
         $scope.viewForm = !$scope.viewForm;
         if ($scope.viewForm){
@@ -11,12 +13,16 @@ homeApp.controller('userController', function($scope, $http) {
         else{
         	$scope.icon = "glyphicon glyphicon-plus";
         }
+        $scope.messageSuccess = "";
+    	$scope.messageError = "";
     };
     $scope.loadUser = function(index) {
     	$scope.viewForm = true;
     	$scope.icon = "glyphicon glyphicon-minus";
         $http.get("/users/getuser?id="+index).success(function(response) {
     		$scope.newuser = response;
+    		$scope.messageSuccess = "";
+    		$scope.messageError = "";
     	});
     };
     $scope.addUser = function() {
@@ -30,30 +36,38 @@ homeApp.controller('userController', function($scope, $http) {
     		$scope.newuser.id="";
         	$scope.newuser.name="";
         	$scope.newuser.password="";
-    		alert(isNewUser?"User inserted successfully":"User updated successfully");
+        	$scope.messageSuccess = '<span class="alert alert-success" role="alert" ng-show="messageSuccess" th:text="';
+        	$scope.messageSuccess += isNewUser?"#{users.inserted.success}":"#{users.updated.success}";
+        	$scope.messageSuccess += '"/>';
+        	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
     		alert(response.message);
+    		$scope.messageSuccess = "";
+        	$scope.messageError = isNewUser?"#{users.inserted.error}":"#{users.updated.error}";
 	    });
     };
     $scope.reset = function() {
     	$scope.newuser.id="";
     	$scope.newuser.name="";
     	$scope.newuser.password="";
+    	$scope.messageSuccess = "";
+		$scope.messageError = "";
     }
     $scope.deleteUser = function(index) {
-    	var r = confirm("Are you sure that you want to remove?");
-    	if (r){
-	        $http.delete("/users/deleteuser/"+index).success(function(response) {
-	        	$http.get("/users/getall").success(function(response) {
-	    			$scope.users = response;
-	    		});
-	        	alert("User deleted successfully");
-	    	}).error(function(response, status, headers, config){
-	    		alert(response.message);
-		    });
-    	}
+        $http.delete("/users/deleteuser/"+index).success(function(response) {
+        	$http.get("/users/getall").success(function(response) {
+    			$scope.users = response;
+    		});
+        	$scope.messageSuccess = "#{users.deleted.success}";
+    		$scope.messageError = "";
+    	}).error(function(response, status, headers, config){
+    		$scope.messageSuccess = "";
+    		$scope.messageError = "#{users.deleted.error}";
+	    });
     };
 	$http.get("/users/getall").success(function(response) {
 		$scope.users = response;
+		$scope.messageSuccess = "";
+		$scope.messageError = "";
 	});
 });
