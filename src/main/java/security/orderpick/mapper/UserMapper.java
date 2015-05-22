@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import security.orderpick.datamodel.User;
+import security.orderpick.datamodel.UserRole;
 
 @Component(UserMapper.name)
 public interface UserMapper {
@@ -39,4 +40,7 @@ public interface UserMapper {
 	@Delete("delete from users where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteUser(int id);
+
+	@Insert("insert into authorities(id_user,id_role) values((select id from users where name =#{user}),(select id from roles where name =#{role}))")
+	public int addRoleAdmin(UserRole user);
 }

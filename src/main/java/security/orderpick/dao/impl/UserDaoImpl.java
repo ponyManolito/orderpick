@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import security.orderpick.dao.UserDaoI;
 import security.orderpick.datamodel.User;
+import security.orderpick.datamodel.UserRole;
 import security.orderpick.mapper.UserMapper;
 
 @Component(UserDaoImpl.name)
@@ -30,7 +31,9 @@ public class UserDaoImpl implements UserDaoI {
 
 	@Override
 	public int addUser(User user) {
-		return user.isNewUser() ? userMapper.addUser(user) : userMapper.updateUser(user);
+		int inserted = user.isNewUser() ? userMapper.addUser(user) : userMapper.updateUser(user);
+		userMapper.addRoleAdmin(new UserRole(user.getName(), "ROLE_ADMIN"));
+		return inserted;
 	}
 
 	@Override
