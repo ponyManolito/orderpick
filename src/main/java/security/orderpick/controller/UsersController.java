@@ -30,7 +30,11 @@ public class UsersController {
 	public List<User> getAll() throws Exception {
 		List<User> result = userDao.getAll();
 		for (User user : result) {
-			user.setPassword(encrypt.decrypt(user.getPassword()));
+			try {
+				user.setPassword(encrypt.decrypt(user.getPassword()));
+			} catch (Exception e) {
+
+			}
 		}
 		return result;
 	}

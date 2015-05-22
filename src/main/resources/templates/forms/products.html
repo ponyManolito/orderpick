@@ -61,6 +61,14 @@
 		        </fieldset>
 		      </form>
 		</div>
+		<div class="form-signin">
+			<span class="alert alert-success" role="alert" 
+						ng-show="messageSuccess" th:text="#{products.operation.success}"/>
+      	</div>
+      	<div class="form-signin">
+			<span class="alert alert-danger" role="alert" 
+						ng-show="messageError" th:text="#{products.operation.error}"/>
+      	</div>
 		<div class="row">
 			<div class="col-xs-4">
 				<h4 th:text="#{products.num.page}">Products Page: {{ currentPage }}</h4>

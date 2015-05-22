@@ -43,6 +43,7 @@ public class UserDaoImpl implements UserDaoI {
 
 	@Override
 	public int deleteUser(int id) {
+		userMapper.deleteRoleAdmin(id, "ROLE_ADMIN");
 		return userMapper.deleteUser(id);
 	}
 }
