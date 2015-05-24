@@ -36,14 +36,12 @@ homeApp.controller('userController', function($scope, $http) {
     		$scope.newuser.id="";
         	$scope.newuser.name="";
         	$scope.newuser.password="";
-        	$scope.messageSuccess = '<span class="alert alert-success" role="alert" ng-show="messageSuccess" th:text="';
-        	$scope.messageSuccess += isNewUser?"#{users.inserted.success}":"#{users.updated.success}";
-        	$scope.messageSuccess += '"/>';
+        	$scope.messageSuccess = 'true';
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
     		alert(response.message);
     		$scope.messageSuccess = "";
-        	$scope.messageError = isNewUser?"#{users.inserted.error}":"#{users.updated.error}";
+        	$scope.messageError = "true";
 	    });
     };
     $scope.reset = function() {
@@ -58,11 +56,11 @@ homeApp.controller('userController', function($scope, $http) {
         	$http.get("/users/getall").success(function(response) {
     			$scope.users = response;
     		});
-        	$scope.messageSuccess = "#{users.deleted.success}";
+        	$scope.messageSuccess = "true";
     		$scope.messageError = "";
     	}).error(function(response, status, headers, config){
     		$scope.messageSuccess = "";
-    		$scope.messageError = "#{users.deleted.error}";
+    		$scope.messageError = "true";
 	    });
     };
 	$http.get("/users/getall").success(function(response) {

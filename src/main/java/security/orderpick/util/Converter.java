@@ -3,6 +3,8 @@ package security.orderpick.util;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
@@ -11,20 +13,33 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mysql.jdbc.StringUtils;
 
+import security.orderpick.config.Constants;
+import security.orderpick.datamodel.Parameter;
 import security.orderpick.datamodel.Product;
+import security.orderpick.mapper.ParameterMapper;
 
 @Component(Converter.name)
 public class Converter {
 	
 	public static final String name="conventer";
 	
-	public static final String url_images="/tmp/food/images";
-	public static final String url_videos="/tmp/food/videos";
+	public String url_images;
+	public String url_videos;
+	
+	@Resource(name = ParameterMapper.name)
+	private ParameterMapper parameterMapper;
 	
 	public Converter() {
 	}
-
+	
+	public void getValues(){
+		Parameter paramImage = parameterMapper.getParameter(Constants.BASE_URL_IMAGE);
+		Parameter paramVideo = parameterMapper.getParameter(Constants.BASE_URL_IMAGE);
+		url_images = paramImage.getValue();
+		url_videos  = paramVideo.getValue();
+	}
 	public Product converterProduct(security.orderpick.viewmodel.Product product) throws IOException {
+		getValues();
 		Product productDataModel = new Product();
 		productDataModel.setId(product.getId());
 		productDataModel.setDescription(product.getDescription());
@@ -52,6 +67,7 @@ public class Converter {
 
 	public Product converterProduct(String id, String name, String description,
 			Boolean empty, String price, MultipartFile image, MultipartFile movie) throws IOException {
+		getValues();
 		Product productDataModel = new Product();
 		if (!StringUtils.isNullOrEmpty(id)){
 			productDataModel.setId(Integer.getInteger(id));

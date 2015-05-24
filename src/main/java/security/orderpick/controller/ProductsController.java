@@ -37,13 +37,6 @@ public class ProductsController {
 		return productDao.getProduct(id);
 	}
 
-	/*
-	 * @RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces =
-	 * "application/json") public int addProduct(@RequestBody security.orderpick.viewmodel.Product
-	 * product) throws IOException { return
-	 * productDao.addProduct(converter.converterProduct(product)); }
-	 */
-
 	@RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces = "application/json")
 	public int addProduct(@RequestParam(value = "id", required = false) String id, 
 			@RequestParam(value = "name") String name,@RequestParam(value = "description") String description,

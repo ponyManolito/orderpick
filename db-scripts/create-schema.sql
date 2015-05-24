@@ -27,6 +27,14 @@ insert into users(name,password) values("admin","admin");
 insert into roles(name,description) values("ROLE_ADMIN","Role as administrator");
 insert into authorities(id_user,id_role) values((select id from users where name ="admin"),(select id from roles where name ="ROLE_ADMIN"));
 
+CREATE TABLE if not exists cf_parameters (
+	name VARCHAR(60) NOT NULL PRIMARY KEY,
+	value VARCHAR(100) NOT NULL
+);
+
+insert into cf_parameters(name,value) values("BASE_URL_IMAGE","/home/ivan/tmp/image");
+insert into cf_parameters(name,value) values("BASE_URL_VIDEO","/home/ivan/tmp/image");
+
 CREATE TABLE if not exists cf_tables (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(60) NOT NULL,
