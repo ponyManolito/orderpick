@@ -68,13 +68,10 @@ public class TableDaoImpl implements TableDaoI {
 	public boolean unassignTable(String name) {
 		Table table = tableMapper.getTableByName(name);
 		if (table != null) {
-			table = tableMapper.getTableIfAvailable(name);
-			if (table != null) {
-				table.setDescription("");
-				table.setAvailable(true);
-				tableMapper.updateTable(table);
-				return true;
-			}
+			table.setDescription("");
+			table.setAvailable(true);
+			tableMapper.updateTable(table);
+			return true;
 		}
 		return false;
 	}
