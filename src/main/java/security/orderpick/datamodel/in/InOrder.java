@@ -1,23 +1,27 @@
-package security.orderpick.datamodel;
+package security.orderpick.datamodel.in;
 
 import java.util.Date;
+import java.util.List;
 
 import security.orderpick.datamodel.common.Entity;
 
-public class Order extends Entity {
+public class InOrder extends Entity {
 
 	public int idTable;
 
 	public String description;
 
-	public Order() {}
+	public List<InOrderType> types;
 
-	public Order(int id, int idTable, String description, Date regTime) {
+	public InOrder() {}
+
+	public InOrder(int id, int idTable, String description, List<InOrderType> types, Date reg_date) {
 		super();
 		setId(id);
 		this.idTable = idTable;
 		this.description = description;
-		setReg_date(regTime);
+		this.types = types;
+		setReg_date(reg_date);
 	}
 
 	public int getIdTable() {
@@ -34,6 +38,14 @@ public class Order extends Entity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<InOrderType> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<InOrderType> types) {
+		this.types = types;
 	}
 
 	public boolean isNew() {
