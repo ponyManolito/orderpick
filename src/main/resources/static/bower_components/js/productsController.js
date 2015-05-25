@@ -19,11 +19,15 @@ homeApp.controller('productsController', function($scope, $http) {
     $scope.loadProduct = function(index) {
     	$scope.viewForm = true;
     	$scope.icon = "glyphicon glyphicon-minus";
-        $http.get("/productss/getproduct?id="+index).success(function(response) {
+        $http.get("/products/getproduct?id="+index).success(function(response) {
     		$scope.newproduct = response;
     		$scope.messageSuccess = "";
     		$scope.messageError = "";
-    	});
+    	}).error(function(response, status, headers, config){
+    		alert(response.message)
+    		$scope.messageSuccess = "";
+    		$scope.messageError = "true";
+	    });
     };
     $scope.addProduct = function() {
     	$scope.viewForm = false;

@@ -86,25 +86,26 @@ public class Converter {
 		productDataModel.setEmpty(empty);
 		productDataModel.setPrice(Double.parseDouble(price));
 		if (image != null) {
-			File newFile = new File(url_images + image.getOriginalFilename());
+			File newFile = new File(url_images + "/" + image.getOriginalFilename());
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(image.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_images + image.getName());
+			productDataModel.setImage(url_images + "/" + image.getName());
 		}
 
 		if (movie != null) {
-			File newFile = new File(url_images + movie.getOriginalFilename());
+			File newFile = new File(url_videos + "/" + movie.getOriginalFilename());
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(movie.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_videos + movie.getName());
+			productDataModel.setImage(url_videos + "/" + movie.getName());
 		}
 
 		return productDataModel;
 	}
 
 	public security.orderpick.viewmodel.Product convertToDataViewProduct(Product product) throws IOException {
+		getValues();
 		security.orderpick.viewmodel.Product result = new security.orderpick.viewmodel.Product();
 		result.setId(product.getId());
 		result.setDescription(product.getDescription());
@@ -173,4 +174,5 @@ public class Converter {
 
 		return results;
 	}
+
 }
