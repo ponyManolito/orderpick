@@ -5,6 +5,33 @@ homeApp.controller('productsController', function($scope, $http) {
 	$scope.pageSize = 5;
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
+	$scope.showImage = "";
+	$scope.showImageName = "";
+	$scope.showVideo = "";
+	$scope.showVideoName = "";
+	$scope.showFileName = function(element) {
+		$scope.$apply(function(scope) {
+	      console.log('files:', element.files);
+	      // Turn the FileList object into an Array
+	        scope.files = []
+	        for (var i = 0; i < element.files.length; i++) {
+	          scope.files.push(element.files[i])
+	        }
+	      scope.progressVisible = false
+	      });
+	};
+		/*alert(input[0].name)
+        if ($scope.newproduct.image && $scope.newproduct.image[0] 
+        		&& $scope.newproduct.image[0].type.indexOf('image') > -1){
+        	$scope.showImage = "true";
+        	$scope.showImageName = $scope.newproduct.image[0].name;
+        }
+        if ($scope.newproduct.movie && $scope.newproduct.movie[0]
+        		&& $scope.newproduct.movie[0].type.indexOf('video') > -1){
+        	$scope.showVideo = "true";
+        	$scope.showVideoName = $scope.newproduct.movie[0].name;
+        }
+    };*/
 	$scope.add = function() {
         $scope.viewForm = !$scope.viewForm;
         if ($scope.viewForm){

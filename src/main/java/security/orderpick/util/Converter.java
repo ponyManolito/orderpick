@@ -90,7 +90,7 @@ public class Converter {
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(image.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_images + "/" + image.getName());
+			productDataModel.setImage(url_images + "/" + image.getOriginalFilename());
 		}
 
 		if (movie != null) {
@@ -98,7 +98,7 @@ public class Converter {
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(movie.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_videos + "/" + movie.getName());
+			productDataModel.setImage(url_videos + "/" + movie.getOriginalFilename());
 		}
 
 		return productDataModel;
@@ -112,7 +112,7 @@ public class Converter {
 		result.setName(product.getName());
 		result.setEmpty(product.isEmpty());
 		result.setPrice(product.getPrice());
-		if (StringUtils.isNullOrEmpty(product.getImage())) {
+		if (!StringUtils.isNullOrEmpty(product.getImage())) {
 			File newFile = new File(url_images + product.getImage());
 			if (!newFile.exists()) {
 				DiskFileItem fileItem = new DiskFileItem("image", "image/jpeg", true, newFile.getName(), 100000000,
@@ -122,7 +122,7 @@ public class Converter {
 			}
 		}
 
-		if (product.getMovie() != null) {
+		if (!StringUtils.isNullOrEmpty(product.getMovie())) {
 			File newFile = new File(url_images + product.getMovie());
 			if (!newFile.exists()) {
 				DiskFileItem fileItem = new DiskFileItem("video", "video/mpeg", true, newFile.getName(), 100000000,

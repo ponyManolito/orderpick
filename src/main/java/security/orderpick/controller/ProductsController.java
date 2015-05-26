@@ -32,19 +32,18 @@ public class ProductsController {
 		return productDao.getAll();
 	}
 
-	@RequestMapping(method = { RequestMethod.GET }, value = "/getproduct", produces = "application/json")
-	public security.orderpick.viewmodel.Product getProduct(@RequestParam(value = "id") int id) 
-			throws IOException {
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getproduct", produces = "multipart/form-data")
+	public security.orderpick.viewmodel.Product getProduct(@RequestParam(value = "id") int id) throws IOException {
 		return converter.convertToDataViewProduct(productDao.getProduct(id));
 	}
 
 	@RequestMapping(method = { RequestMethod.POST }, value = "/addproduct", produces = "application/json")
-	public int addProduct(@RequestParam(value = "id", required = false) String id, 
-			@RequestParam(value = "name") String name,@RequestParam(value = "description") String description,
+	public int addProduct(@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "name") String name, @RequestParam(value = "description") String description,
 			@RequestParam(value = "price") String price, @RequestParam(value = "empty") Boolean empty,
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam(value = "movie", required = false) MultipartFile movie) throws IOException {
-		return productDao.addProduct(converter.converterProduct(id,name,description,empty,price,image,movie));
+		return productDao.addProduct(converter.converterProduct(id, name, description, empty, price, image, movie));
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")
