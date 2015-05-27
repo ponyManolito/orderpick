@@ -5,7 +5,7 @@
 		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{products.button.title}">
 			<span ng-class="icon"></span>
 		</button>
-		<div class="row" ng-show="viewForm">
+		<div class="row" ng-show=	"viewForm">
 			<form class="form-horizontal well" enctype="multipart/form-data" name="formProduct">
 		        <fieldset>
 		          <legend th:text="#{products.form.legend}">Product's management</legend>
@@ -31,13 +31,19 @@
 		          	<div ng-file-drop="" ng-file-select="" ng-model="newproduct.image" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
 		          	ng-multiple="false" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
-						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not available</div>
+						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not 	available</div>
 						<div ng-show="dropAvailable" th:text="#{products.form.drop}">Drop Images or PDFs</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
-					<div class="preview" ng-show="newproduct.image[0].type.indexOf('image') > -1">
+					<div ng-show="newproduct.image[0].type.indexOf('image') > -1">
 						<div th:text="#{products.image.name}">Image name</div>
 						<div>{{newproduct.image[0].name}}</div>
+						<img style="max-width:300px" />
+					</div>
+					<div ng-show="showImageName">
+						<div th:text="#{products.image.name}">Image name</div>
+						<div>{{showImageName}}</div>
+						<img style="max-width:300px" id="loadImage"/>
 					</div>
 				  </div>
 				  <div class="form-group">
@@ -48,9 +54,9 @@
 						<div ng-show="dropAvailable" th:text="#{products.form.drop.movie}">Drop videos</div>
 						<div th:text="#{products.form.click}">click to select</div>
 					</div>
-					<div class="preview" ng-show="showVideo">
+					<div class="preview" ng-show="newproduct.video[0].type.indexOf('image') > -1">
 						<div th:text="#{products.movie.name}">Movie name</div>
-						<div>{{showVide0Name}}</div>
+						<div>{{newproduct.movie[0].name}}</div>
 					</div>
 		          </div>
 		          <div class="form-actions" >

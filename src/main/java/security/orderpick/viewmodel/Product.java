@@ -1,7 +1,5 @@
 package security.orderpick.viewmodel;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import security.orderpick.datamodel.common.Entity;
 
 public class Product extends Entity {
@@ -10,12 +8,16 @@ public class Product extends Entity {
 
 	private String description;
 
-	private MultipartFile image;
+	private String imageName;
 
-	private MultipartFile movie;
-	
+	private String imageData;
+
+	private String movieData;
+
+	private String movieName;
+
 	private Double price;
-	
+
 	private boolean empty;
 
 	public Product() {}
@@ -36,20 +38,36 @@ public class Product extends Entity {
 		this.description = description;
 	}
 
-	public MultipartFile getImage() {
-		return image;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImage(MultipartFile image) {
-		this.image = image;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
-	public MultipartFile getMovie() {
-		return movie;
+	public String getImageData() {
+		return imageData;
 	}
 
-	public void setMovie(MultipartFile movie) {
-		this.movie = movie;
+	public void setImageData(String imageData) {
+		this.imageData = imageData;
+	}
+
+	public String getMovieData() {
+		return movieData;
+	}
+
+	public void setMovieData(String movieData) {
+		this.movieData = movieData;
+	}
+
+	public String getMovieName() {
+		return movieName;
+	}
+
+	public void setMovieName(String movieName) {
+		this.movieName = movieName;
 	}
 
 	public boolean isEmpty() {

@@ -5,33 +5,19 @@ homeApp.controller('productsController', function($scope, $http) {
 	$scope.pageSize = 5;
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
-	$scope.showImage = "";
 	$scope.showImageName = "";
-	$scope.showVideo = "";
-	$scope.showVideoName = "";
-	$scope.showFileName = function(element) {
-		$scope.$apply(function(scope) {
-	      console.log('files:', element.files);
-	      // Turn the FileList object into an Array
-	        scope.files = []
-	        for (var i = 0; i < element.files.length; i++) {
-	          scope.files.push(element.files[i])
-	        }
-	      scope.progressVisible = false
-	      });
-	};
-		/*alert(input[0].name)
-        if ($scope.newproduct.image && $scope.newproduct.image[0] 
-        		&& $scope.newproduct.image[0].type.indexOf('image') > -1){
-        	$scope.showImage = "true";
-        	$scope.showImageName = $scope.newproduct.image[0].name;
-        }
-        if ($scope.newproduct.movie && $scope.newproduct.movie[0]
-        		&& $scope.newproduct.movie[0].type.indexOf('video') > -1){
-        	$scope.showVideo = "true";
-        	$scope.showVideoName = $scope.newproduct.movie[0].name;
-        }
-    };*/
+	$scope.$watch('newproduct.image', function () {
+		if ($scope.newproduct.image && $scope.newproduct.image[0]){
+			var reader  = new FileReader();
+			$scope.showImage = "";
+			$scope.showImageName = "";
+			reader.onloadend = function () {
+				var preview = document.querySelector('img');
+				preview.src = reader.result;
+			}
+        	reader.readAsDataURL($scope.newproduct.image[0]);
+		}
+    });
 	$scope.add = function() {
         $scope.viewForm = !$scope.viewForm;
         if ($scope.viewForm){
@@ -47,7 +33,16 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.viewForm = true;
     	$scope.icon = "glyphicon glyphicon-minus";
         $http.get("/products/getproduct?id="+index).success(function(response) {
-    		$scope.newproduct = response;
+    		$scope.aux = response;
+    		$scope.newproduct.id=response.id;
+        	$scope.newproduct.name=response.name;
+        	$scope.newproduct.price=response.price;
+        	$scope.newproduct.description=response.description;
+    		if (response.imageData){
+    			var preview = document.getElementById('loadImage');
+    			preview.src = response.imageData;
+    			$scope.showImageName = response.imageName;
+    		}
     		$scope.messageSuccess = "";
     		$scope.messageError = "";
     	}).error(function(response, status, headers, config){
@@ -78,8 +73,6 @@ homeApp.controller('productsController', function($scope, $http) {
         	$scope.newproduct.name="";
         	$scope.newproduct.price="";
         	$scope.newproduct.description="";
-        	$scope.newproduct.image=null;
-        	$scope.newproduct.movie=null;
         	$scope.messageSuccess = "true";
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
@@ -98,19 +91,16 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.messageError = "";
     };
     $scope.deleteProduct = function(index) {
-    	var r = confirm("Are you sure that you want to remove?");
-    	if (r){
-	        $http.delete("/products/deleteproduct/"+index).success(function(response) {
-	        	$http.get("/products/getall").success(function(response) {
-	    			$scope.products = response;
-	    		});
-	        	$scope.messageSuccess = "true";
-	        	$scope.messageError = "";
-	    	}).error(function(response, status, headers, config){
-	    		$scope.messageSuccess = "";
-	    		$scope.messageError = "true";
-		    });
-    	}
+        $http.delete("/products/deleteproduct/"+index).success(function(response) {
+        	$http.get("/products/getall").success(function(response) {
+    			$scope.products = response;
+    		});
+        	$scope.messageSuccess = "true";
+        	$scope.messageError = "";
+    	}).error(function(response, status, headers, config){
+    		$scope.messageSuccess = "";
+    		$scope.messageError = "true";
+	    });
     };
     $http.get("/products/getall").success(function(response) {
 		$scope.products = response;

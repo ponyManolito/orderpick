@@ -32,8 +32,8 @@ CREATE TABLE if not exists cf_parameters (
 	value VARCHAR(100) NOT NULL
 );
 
-insert into cf_parameters(name,value) values("BASE_URL_IMAGE","/home/ivan/tmp/image");
-insert into cf_parameters(name,value) values("BASE_URL_VIDEO","/home/ivan/tmp/video");
+insert into cf_parameters(name,value) values("BASE_URL_IMAGE","/home/ivan/tmp/image/");
+insert into cf_parameters(name,value) values("BASE_URL_VIDEO","/home/ivan/tmp/video/");
 
 CREATE TABLE if not exists cf_tables (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,

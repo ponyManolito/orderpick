@@ -48,7 +48,7 @@ public class ProductsController {
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")
 	public int updateUser(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
-		return productDao.updateProduct(converter.converterProduct(product));
+		return -1; // productDao.updateProduct(converter.converterProduct(product));
 	}
 
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/deleteproduct/{id}", produces = "application/json")

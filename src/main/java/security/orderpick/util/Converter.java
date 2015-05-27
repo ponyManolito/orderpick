@@ -7,11 +7,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import security.orderpick.config.Constants;
 import security.orderpick.datamodel.Order;
@@ -38,6 +36,9 @@ public class Converter {
 	@Resource(name = ParameterMapper.name)
 	private ParameterMapper parameterMapper;
 
+	@Resource(name = EncodeBased64Binary.name)
+	private EncodeBased64Binary encodeBased64;
+
 	public Converter() {}
 
 	public void getValues() {
@@ -54,22 +55,19 @@ public class Converter {
 		productDataModel.setDescription(product.getDescription());
 		productDataModel.setName(product.getName());
 		productDataModel.setEmpty(product.isEmpty());
+		productDataModel.setEmpty(product.isEmpty());
+		productDataModel.setEmpty(product.isEmpty());
 
-		if (product.getImage() != null) {
-			File newFile = new File(url_images + product.getImage().getName());
-			if (!newFile.exists()) {
-				FileUtils.copyInputStreamToFile(product.getImage().getInputStream(), newFile);
-			}
-			productDataModel.setImage(url_images + product.getImage().getName());
-		}
-
-		if (product.getMovie() != null) {
-			File newFile = new File(url_images + product.getMovie().getName());
-			if (!newFile.exists()) {
-				FileUtils.copyInputStreamToFile(product.getMovie().getInputStream(), newFile);
-			}
-			productDataModel.setImage(url_videos + product.getMovie().getName());
-		}
+		/*
+		 * if (product.getImage() != null) { File newFile = new File(url_images +
+		 * product.getImage().getName()); if (!newFile.exists()) {
+		 * FileUtils.copyInputStreamToFile(product.getImage().getInputStream(), newFile); }
+		 * productDataModel.setImage(url_images + product.getImage().getName()); } if
+		 * (product.getMovie() != null) { File newFile = new File(url_images +
+		 * product.getMovie().getName()); if (!newFile.exists()) {
+		 * FileUtils.copyInputStreamToFile(product.getMovie().getInputStream(), newFile); }
+		 * productDataModel.setImage(url_videos + product.getMovie().getName()); }
+		 */
 
 		return productDataModel;
 	}
@@ -86,19 +84,19 @@ public class Converter {
 		productDataModel.setEmpty(empty);
 		productDataModel.setPrice(Double.parseDouble(price));
 		if (image != null) {
-			File newFile = new File(url_images + "/" + image.getOriginalFilename());
+			File newFile = new File(url_images + image.getOriginalFilename());
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(image.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_images + "/" + image.getOriginalFilename());
+			productDataModel.setImage(url_images + image.getOriginalFilename());
 		}
 
 		if (movie != null) {
-			File newFile = new File(url_videos + "/" + movie.getOriginalFilename());
+			File newFile = new File(url_videos + movie.getOriginalFilename());
 			if (!newFile.exists()) {
 				FileUtils.copyInputStreamToFile(movie.getInputStream(), newFile);
 			}
-			productDataModel.setImage(url_videos + "/" + movie.getOriginalFilename());
+			productDataModel.setImage(url_videos + movie.getOriginalFilename());
 		}
 
 		return productDataModel;
@@ -113,22 +111,18 @@ public class Converter {
 		result.setEmpty(product.isEmpty());
 		result.setPrice(product.getPrice());
 		if (!StringUtils.isNullOrEmpty(product.getImage())) {
-			File newFile = new File(url_images + product.getImage());
+			File newFile = new File(product.getImage());
 			if (!newFile.exists()) {
-				DiskFileItem fileItem = new DiskFileItem("image", "image/jpeg", true, newFile.getName(), 100000000,
-						newFile.getParentFile());
-				fileItem.getOutputStream();
-				result.setImage(new CommonsMultipartFile(fileItem));
+				result.setImageName(product.getImage().replaceFirst(url_images, ""));
+				result.setImageData(encodeBased64.encodeFileToBase64Binary(newFile));
 			}
 		}
 
 		if (!StringUtils.isNullOrEmpty(product.getMovie())) {
-			File newFile = new File(url_images + product.getMovie());
+			File newFile = new File(product.getMovie());
 			if (!newFile.exists()) {
-				DiskFileItem fileItem = new DiskFileItem("video", "video/mpeg", true, newFile.getName(), 100000000,
-						newFile.getParentFile());
-				fileItem.getOutputStream();
-				result.setMovie(new CommonsMultipartFile(fileItem));
+				result.setMovieName(product.getImage().replaceFirst(url_videos, ""));
+				result.setMovieData(encodeBased64.encodeFileToBase64Binary(newFile));
 			}
 		}
 		return result;
