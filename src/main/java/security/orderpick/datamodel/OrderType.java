@@ -5,17 +5,17 @@ public class OrderType {
 
 	public int idOrder;
 
-	public String orderType;
+	public int idOrderType;
 
 	public String status;
 
 	public OrderType() {}
 
-	public OrderType(int id, int idOrder, String orderType, String status) {
+	public OrderType(int id, int idOrder, int idOrderType, String status) {
 		super();
 		this.id = id;
 		this.idOrder = idOrder;
-		this.orderType = orderType;
+		this.idOrderType = idOrderType;
 		this.status = status;
 	}
 
@@ -35,12 +35,12 @@ public class OrderType {
 		this.idOrder = idOrder;
 	}
 
-	public String getOrderType() {
-		return orderType;
+	public int getIdOrderType() {
+		return idOrderType;
 	}
 
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
+	public void setIdOrderType(int idOrderType) {
+		this.idOrderType = idOrderType;
 	}
 
 	public String getStatus() {

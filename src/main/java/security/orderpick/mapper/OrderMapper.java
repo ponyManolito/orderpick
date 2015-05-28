@@ -20,17 +20,18 @@ public interface OrderMapper {
 
 	public static final String name = "orderMapper";
 
-	@Select("SELECT orders.id as ID, cf_tables.name as NAME, orders_type.order_type as ORDER_TYPE, "
-			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type "
-			+ "WHERE cf_tables.id = orders.id_table AND orders.id = orders_type.id_order")
+	@Select("SELECT orders.id as ID, cf_tables.name as NAME, cf_types.name as ORDER_TYPE, "
+			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type, cf_types "
+			+ "WHERE cf_types.id=orders_type.id_order_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
 			@Result(property = "reg_date", column = "REG_DATE") })
 	public List<OrderView> getAll();
-
-	@Select("SELECT orders.id as ID, cf_tables.name as NAME, orders_type.order_type as ORDER_TYPE, "
-			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type "
-			+ "WHERE cf_tables.id = orders.id_table AND orders.id = orders_type.id_order orders_type.status<>'DELIVERED'")
+	
+	@Select("SELECT orders.id as ID, cf_tables.name as NAME, cf_types.name as ORDER_TYPE, "
+			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type, cf_types "
+			+ "WHERE cf_types.id=orders_type.id_order_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order "
+			+"orders_type.status<>'DELIVERED'")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
 			@Result(property = "reg_date", column = "REG_DATE") })
@@ -40,7 +41,7 @@ public interface OrderMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addOrder(Order order);
 
-	@Insert("Insert into orders_type(id_order,order_type,status) values(#{idOrder},#{orderType},#{status})")
+	@Insert("Insert into orders_type(id_order,id_order_type,status) values(#{idOrder},#{idOrderType},#{status})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addOrderType(OrderType orderType);
 

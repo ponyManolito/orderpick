@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination','angularFileUpload']);
+var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination','angularFileUpload','ui.multiselect']);
 homeApp.controller('homeController', function($scope, $http) {
 	$scope.iconHomePlus = "glyphicon glyphicon-plus";
 	$scope.viewConf = false;

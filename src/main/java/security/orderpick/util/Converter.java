@@ -138,7 +138,7 @@ public class Converter {
 
 		if (order.getTypes() != null && !order.getTypes().isEmpty()) {
 			for (InOrderType inOrderType : order.getTypes()) {
-				OrderType orderType = new OrderType(inOrderType.getId(), idOrder, inOrderType.getType(),
+				OrderType orderType = new OrderType(inOrderType.getId(), idOrder, inOrderType.getId(),
 						inOrderType.getStatus());
 				result.add(orderType);
 			}

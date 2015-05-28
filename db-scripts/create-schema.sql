@@ -44,13 +44,20 @@ CREATE TABLE if not exists cf_tables (
 
 CREATE TABLE if not exists cf_products (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
-	id_order_type INT(8),
 	name VARCHAR(60) NOT NULL,
 	description VARCHAR(100) NOT NULL,
 	image VARCHAR(100),
 	movie VARCHAR(100),
 	empty VARCHAR(1),
 	price double
+);
+
+CREATE TABLE if not exists product_types (
+	id INT(8) AUTO_INCREMENT PRIMARY KEY,
+	id_product INT(8) NOT NULL,
+	id_type INT(8) NOT NULL,
+	CONSTRAINT FOREIGN KEY (id_product) REFERENCES cf_products(id),
+	CONSTRAINT FOREIGN KEY (id_type) REFERENCES cf_types
 );
 
 CREATE TABLE if not exists cf_turns (

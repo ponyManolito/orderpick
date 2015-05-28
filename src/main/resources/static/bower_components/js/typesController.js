@@ -38,9 +38,9 @@ homeApp.controller('typeController', function($scope, $http) {
         	$scope.newtype.description="";
         	$scope.messageSuccess = 'true';
         	$scope.messageError = "";
-    		alert(isNewType?"Type inserted successfully":"Type updated successfully");
     	}).error(function(response, status, headers, config){
-    		alert(response.message);
+    		$scope.messageSuccess = "";
+        	$scope.messageError = "true";
 	    });
     };
     $scope.reset = function() {
@@ -58,7 +58,8 @@ homeApp.controller('typeController', function($scope, $http) {
         	$scope.messageSuccess = 'true';
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
-    		alert(response.message);
+    		$scope.messageSuccess = "";
+        	$scope.messageError = "true";
 	    });
     };
 	$http.get("/types/getall").success(function(response) {
