@@ -4,6 +4,8 @@ import security.orderpick.datamodel.common.Entity;
 
 public class Product extends Entity {
 
+	private int idOrderType;
+
 	private String name;
 
 	private String description;
@@ -21,6 +23,14 @@ public class Product extends Entity {
 	private boolean empty;
 
 	public Product() {}
+
+	public int getIdOrderType() {
+		return idOrderType;
+	}
+
+	public void setIdOrderType(int idOrderType) {
+		this.idOrderType = idOrderType;
+	}
 
 	public String getName() {
 		return name;

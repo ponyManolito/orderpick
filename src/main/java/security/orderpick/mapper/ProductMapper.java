@@ -22,11 +22,12 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE"),
+			@Result(property = "id_order_type", column = "ID_ORDER_TYPE") })
 	public Product getProduct(int id);
 
-	@Insert("insert into cf_products (name, description, image, movie, empty, price) "
-			+ "values(#{name}, #{description}, #{image}, #{movie}, #{empty}, #{price})")
+	@Insert("insert into cf_products (name, id_order_type, description, image, movie, empty, price) "
+			+ "values(#{name}, #{idOrderType}, #{description}, #{image}, #{movie}, #{empty}, #{price})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addProduct(Product product);
 
@@ -34,10 +35,11 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE"),
+			@Result(property = "id_order_type", column = "ID_ORDER_TYPE") })
 	public List<Product> getAll();
 
-	@Update("update cf_products set name=#{name}, description=#{description}, "
+	@Update("update cf_products set name=#{name}, id_order_type=#{idOrderType}, description=#{description}, "
 			+ "image=#{image}, movie=#{movie}, empty=#{empty}, price=#{price} where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int updateProduct(Product product);

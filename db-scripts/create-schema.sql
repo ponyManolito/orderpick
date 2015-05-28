@@ -38,12 +38,13 @@ insert into cf_parameters(name,value) values("BASE_URL_VIDEO","/home/ivan/tmp/vi
 CREATE TABLE if not exists cf_tables (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(60) NOT NULL,
-	description VARCHAR(100) NOT NULL,
+	description VARCHAR(100),
 	available VARCHAR(1)
 );
 
 CREATE TABLE if not exists cf_products (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
+	id_order_type INT(8),
 	name VARCHAR(60) NOT NULL,
 	description VARCHAR(100) NOT NULL,
 	image VARCHAR(100),
@@ -59,6 +60,13 @@ CREATE TABLE if not exists cf_turns (
 	time_finish TIME NOT NULL
 );
 
+CREATE TABLE if not exists cf_types (
+	id INT(8) AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(60) NOT NULL,
+	description VARCHAR(100),
+	available VARCHAR(1)
+);
+
 CREATE TABLE if not exists orders (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	id_table INT(8) NOT NULL,
@@ -70,9 +78,10 @@ CREATE TABLE if not exists orders (
 CREATE TABLE if not exists orders_type (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	id_order INT(8) NOT NULL,
-	order_type VARCHAR(100),
+	id_order_type INT(8) NOT NULL,
 	status VARCHAR(100),
-	CONSTRAINT FOREIGN KEY (id_order) REFERENCES orders(id)
+	CONSTRAINT FOREIGN KEY (id_order) REFERENCES orders(id),
+	CONSTRAINT FOREIGN KEY (id_order_type) REFERENCES cf_types(id)
 );
 
 CREATE TABLE if not exists orders_products (

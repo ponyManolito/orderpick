@@ -1,0 +1,92 @@
+	<h1 th:text="#{types.title.main}">
+		Types 
+	</h1>
+	<div ng-controller="typeController" class="center-div">
+		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{types.button.title}">
+			<span ng-class="icon"></span>
+		</button>
+		<div class="row" ng-show="viewForm">
+			<form class="form-horizontal well" name="formType">
+				<fieldset>
+				<legend th:text="#{types.form.legend}">Type's management</legend>
+				<div class="control-group">
+					<input ng-model="newtype.id" type="hidden" value="" /> 
+					<input class="form-control input-xlarge" ng-model="newtype.name" type="text"
+						th:placeholder="#{tables.form.name}" value="" ng-required="true"/> 
+					<label class="control-label" for="availableType" th:text="#{tables.form.available}">Available</label>
+		            <div class="controls">
+		              <input type="checkbox" id="optionsCheckbox" ng-model="newtype.available" ng-init="newtype.available=true"  />
+		            </div>
+		            <div class="controls">
+		            	<textarea class="form-control input-xlarge" id="typeDescription" rows="5"
+		            		ng-model="newtype.description" h:placeholder="#{tables.form.description}" value="">
+		            	</textarea>
+		            </div>
+					<div class="form-actions">
+						<button ng-click="addType()" class="btn btn-primary" ng-disabled="formType.$invalid" 
+							th:text="#{users.form.save}">Save</button>
+						<button ng-click="reset()" th:text="#{users.form.clear}">Clear</button>
+					</div>
+				</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="form-signin">
+			<span class="alert alert-success" role="alert" 
+						ng-show="messageSuccess" th:text="#{home.operation.success}"/>
+      	</div>
+      	<div class="form-signin">
+			<span class="alert alert-danger" role="alert" 
+						ng-show="messageError" th:text="#{home.operation.error}"/>
+      	</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<h4 th:text="#{types.num.page}">Users Page: {{ currentPage }}</h4>
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.search}">Search:</label> 
+				<input ng-model="q" id="search"
+					class="form-control" th:placeholder="#{users.filter.text}" />
+			</div>
+			<div class="col-xs-4">
+				<label for="search" th:text="#{users.items.page}">items per page:</label> 
+				<input type="number"
+					min="1" max="100" class="form-control" ng-model="pageSize" />
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
+							<th class="col-md-2" th:text="#{tables.form.name}">Name</th>
+							<th class="col-md-6" th:text="#{tables.form.description}">Description</th>
+							<th class="col-md-1" th:text="#{tables.form.available}">Available</th>
+							<th class="col-md-2" th:text="#{users.table.options}">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="type in types | filter:q | itemsPerPage: pageSize"
+							current-page="currentPage">
+							<td class="col-md-1">{{type.id}}</td>
+							<td class="col-md-2">{{type.name}}</td>
+							<td class="col-md-6">{{type.description}}</td>
+							<td class="col-md-1">{{type.available}}</td>
+							<th class="col-md-2">
+								<button type="button" class="btn btn-default"
+									ng-click="loadType(type.id)" th:title="#{types.update.title}">
+									<span class="glyphicon glyphicon-floppy-saved"></span>
+								</button>
+								<button type="button" class="btn btn-default"
+									ng-click="deleteType(type.id)" th:title="#{types.delete.title}">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
