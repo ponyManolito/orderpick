@@ -52,14 +52,6 @@ CREATE TABLE if not exists cf_products (
 	price double
 );
 
-CREATE TABLE if not exists product_types (
-	id INT(8) AUTO_INCREMENT PRIMARY KEY,
-	id_product INT(8) NOT NULL,
-	id_type INT(8) NOT NULL,
-	CONSTRAINT FOREIGN KEY (id_product) REFERENCES cf_products(id),
-	CONSTRAINT FOREIGN KEY (id_type) REFERENCES cf_types
-);
-
 CREATE TABLE if not exists cf_turns (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	number INT(1) NOT NULL,
@@ -72,6 +64,21 @@ CREATE TABLE if not exists cf_types (
 	name VARCHAR(60) NOT NULL,
 	description VARCHAR(100),
 	available VARCHAR(1)
+);
+
+insert into cf_types(name,description,available) values("DRINKS","Cokes, coffee, water, etc...",1);
+insert into cf_types(name,description,available) values("MENU","All days except weekends",1);
+insert into cf_types(name,description,available) values("FIRST","First dishes in a menu",1);
+insert into cf_types(name,description,available) values("SECOND","Second dishes in a menu",1);
+insert into cf_types(name,description,available) values("DESSERTS","Ice-cream, cakes, etc...",1);
+insert into cf_types(name,description,available) values("CARTE","All the dishes availables",1);
+
+CREATE TABLE if not exists product_types (
+	id INT(8) AUTO_INCREMENT PRIMARY KEY,
+	id_product INT(8) NOT NULL,
+	id_type INT(8) NOT NULL,
+	CONSTRAINT FOREIGN KEY (id_product) REFERENCES cf_products(id),
+	CONSTRAINT FOREIGN KEY (id_type) REFERENCES cf_types(id)
 );
 
 CREATE TABLE if not exists orders (

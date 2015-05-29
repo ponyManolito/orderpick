@@ -6,8 +6,9 @@ homeApp.controller('productsController', function($scope, $http) {
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
 	$scope.showImageName = "";
+	$scope.settings = {enableSearch: true};
 	$scope.$watch('newproduct.image', function () {
-		if ($scope.newproduct.image && $scope.newproduct.image[0]){
+		if ($scope.newproduct && $scope.newproduct.image && $scope.newproduct.image[0]){
 			var reader  = new FileReader();
 			$scope.showImage = "";
 			$scope.showImageName = "";
@@ -104,7 +105,16 @@ homeApp.controller('productsController', function($scope, $http) {
     };
     $http.get("/products/getall").success(function(response) {
 		$scope.products = response;
-		$scope.messageSuccess = "";
-		$scope.messageError = "";
+		$http.get("/types/getall").success(function(response) {
+			$scope.alltypes = [];
+			for (i in response){
+				$scope.alltypes[i] = '{id: '+response[i].id + ', label: "' + response[i].name + '"}';
+			}
+			$scope.messageSuccess = "";
+			$scope.messageError = "";
+		}).error(function(response, status, headers, config){
+			$scope.messageSuccess = "";
+			$scope.messageError = "true";
+	    });
 	});
 });

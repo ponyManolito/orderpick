@@ -42,6 +42,7 @@ public class ProductsController {
 			@RequestParam(value = "name") String name, @RequestParam(value = "description") String description,
 			@RequestParam(value = "price") String price, @RequestParam(value = "empty") Boolean empty,
 			@RequestParam(value = "image", required = false) MultipartFile image,
+			@RequestParam(value = "types") List<Integer> types,
 			@RequestParam(value = "movie", required = false) MultipartFile movie) throws IOException {
 		return productDao.addProduct(converter.converterProduct(id, name, description, empty, price, image, movie));
 	}

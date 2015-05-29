@@ -110,6 +110,7 @@ public class Converter {
 		result.setName(product.getName());
 		result.setEmpty(product.isEmpty());
 		result.setPrice(product.getPrice());
+		result.setTypes(product.getTypes());
 		if (!StringUtils.isNullOrEmpty(product.getImage())) {
 			File newFile = new File(product.getImage());
 			if (!newFile.exists()) {
