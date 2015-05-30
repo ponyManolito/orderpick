@@ -57,4 +57,16 @@ public class ProductDaoImpl implements ProductDaoI {
 		productOrdersMapper.deleteByProduct(id);
 		return productMapper.deleteProduct(id);
 	}
+	
+	@Override
+	public List<Product> getAllProductsByType(String type) {
+		List<Product> products = productMapper.getAllProductsByType(type);
+		
+		for (Product product:products){
+			List<Integer> types = productOrdersMapper.getOrdersByProduct(product.getId());
+			product.setTypes(types);
+		}
+		
+		return products;
+	}
 }

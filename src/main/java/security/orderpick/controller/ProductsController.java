@@ -32,7 +32,7 @@ public class ProductsController {
 		return productDao.getAll();
 	}
 
-	@RequestMapping(method = { RequestMethod.GET }, value = "/getproduct", produces = "multipart/form-data")
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getproduct", produces = "application/json")
 	public security.orderpick.viewmodel.Product getProduct(@RequestParam(value = "id") int id) throws IOException {
 		return converter.convertToDataViewProduct(productDao.getProduct(id));
 	}
@@ -48,12 +48,17 @@ public class ProductsController {
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")
-	public int updateUser(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
+	public int updateProduct(@RequestParam security.orderpick.viewmodel.Product product) throws IOException {
 		return -1; // productDao.updateProduct(converter.converterProduct(product));
 	}
 
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/deleteproduct/{id}", produces = "application/json")
-	public int deleteUser(@PathVariable(value = "id") int id) {
+	public int deleteProduct(@PathVariable(value = "id") int id) {
 		return productDao.deleteProduct(id);
+	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getallproducts", produces = "application/json")
+	public List<Product> getAllProductsByType(@RequestParam(value = "type") String type) {
+		return productDao.getAllProductsByType(type);
 	}
 }

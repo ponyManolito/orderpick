@@ -47,4 +47,17 @@ public interface ProductMapper {
 	@Delete("delete from cf_products where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteProduct(int id);
+	
+	@Select("SELECT * FROM cf_products "
+		+ "WHERE id in "
+		+ "(SELECT id_product FROM product_types "
+		+ "WHERE id_type in "
+		+ "(SELECT id FROM cf_types "
+		+ "WHERE name = #{type}))")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
+			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
+			@Result(property = "price", column = "PRICE"),
+			@Result(property = "id_order_type", column = "ID_ORDER_TYPE") })
+	public List<Product> getAllProductsByType(String type);
 }
