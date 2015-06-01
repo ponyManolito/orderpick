@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import security.orderpick.dao.ProductDaoI;
 import security.orderpick.datamodel.Product;
+import security.orderpick.datamodel.ProductOrder;
 import security.orderpick.mapper.ProductMapper;
 import security.orderpick.mapper.ProductOrdersMapper;
 
@@ -44,7 +45,17 @@ public class ProductDaoImpl implements ProductDaoI {
 
 	@Override
 	public int addProduct(Product product) {
-		return product.isNewProduct() ? productMapper.addProduct(product) : productMapper.updateProduct(product);
+		int result = product.isNewProduct() ? productMapper.addProduct(product) : 
+			productMapper.updateProduct(product);
+		if (product.getTypes()!=null && !product.getTypes().isEmpty()){
+			 	for (Integer type:product.getTypes()){
+			 		ProductOrder productOrder = new ProductOrder();
+			 		productOrder.setIdProduct(product.getId());
+			 		productOrder.setIdType(type);
+			 		productOrdersMapper.addProductOrder(productOrder);
+			 	}
+		}
+		return result;
 	}
 
 	@Override

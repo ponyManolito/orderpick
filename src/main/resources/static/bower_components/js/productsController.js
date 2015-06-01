@@ -60,6 +60,13 @@ homeApp.controller('productsController', function($scope, $http) {
     	fd.append('name', $scope.newproduct.name);
     	fd.append('price', $scope.newproduct.price);
     	fd.append('description', $scope.newproduct.description);
+    	if ($scope.selectedModel && $scope.selectedModel.length>0){
+    		var types = new Array();
+    		for (i in $scope.selectedModel){
+				types[i] = $scope.selectedModel[i].id;
+			}
+    		fd.append('types', types);
+    	}
 		fd.append('image', $scope.newproduct.image?$scope.newproduct.image[0]:null);	
     	fd.append('movie', $scope.newproduct.movie?$scope.newproduct.movie[0]:null);
 		fd.append('empty', $scope.newproduct.empty?true:false );
@@ -77,6 +84,7 @@ homeApp.controller('productsController', function($scope, $http) {
         	$scope.messageSuccess = "true";
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
+    		alert(response.message)
     		$scope.messageSuccess = "";
     		$scope.messageError = "true";
 	    });
@@ -88,6 +96,7 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.newproduct.description="";
     	$scope.newproduct.image=null;
     	$scope.newproduct.movie=null;
+    	$scope.selectedModel = [];
     	$scope.messageSuccess = "";
     	$scope.messageError = "";
     };
@@ -105,10 +114,12 @@ homeApp.controller('productsController', function($scope, $http) {
     };
     $http.get("/products/getall").success(function(response) {
 		$scope.products = response;
+		$scope.alltypes = [];
+		$scope.selectedModel = [];
 		$http.get("/types/getall").success(function(response) {
-			$scope.alltypes = [];
 			for (i in response){
-				$scope.alltypes[i] = '{id: '+response[i].id + ', label: "' + response[i].name + '"}';
+				var type = {id:response[i].id, label:response[i].name};
+				$scope.alltypes[i] = type;
 			}
 			$scope.messageSuccess = "";
 			$scope.messageError = "";

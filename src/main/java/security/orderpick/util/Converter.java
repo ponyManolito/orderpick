@@ -73,7 +73,7 @@ public class Converter {
 	}
 
 	public Product converterProduct(String id, String name, String description, Boolean empty, String price,
-			MultipartFile image, MultipartFile movie) throws IOException {
+			MultipartFile image, MultipartFile movie, List<Integer> types) throws IOException {
 		getValues();
 		Product productDataModel = new Product();
 		if (!StringUtils.isNullOrEmpty(id)) {
@@ -83,6 +83,7 @@ public class Converter {
 		productDataModel.setName(name);
 		productDataModel.setEmpty(empty);
 		productDataModel.setPrice(Double.parseDouble(price));
+		productDataModel.setTypes(types);
 		if (image != null) {
 			File newFile = new File(url_images + image.getOriginalFilename());
 			if (!newFile.exists()) {

@@ -43,10 +43,12 @@
 		    <div ng-include="view" ng-show="viewConf"></div>
 		    <div ng-include="'/vieworder'"></div>
 	    </div>
+	    <script src="../static/bower_components/lodash/dist/lodash.min.js"
+			data-th-href="@{/static/bower_components/lodash/dist/lodash.min.js}"></script>
 	    <script src="../static/bower_components/angular/angular.min.js"
 			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
-		<script src="../static/bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"
-			data-th-href="@{/static/bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js}"></script>
+		<script src="../static/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"
+			data-th-href="@{/static/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js}"></script>
 		<script src="../static/bower_components/js/homeController.js"
 			data-th-href="@{/static/bower_components/js/homeController.js}"></script>
 		<script src="../static/bower_components/js/ordersController.js"

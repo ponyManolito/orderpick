@@ -16,10 +16,11 @@
 		              		 id="productName" th:placeholder="#{products.form.name}" value="" ng-required="true"/>
 		              <input type="number" class="form-control input-xlarge" ng-model="newproduct.price" 
 		              		 id="productPrice" th:placeholder="#{products.form.Price}" value="" ng-required="true"/>
-		              <div class="form-control input-xlarge" ng-dropdown-multiselect="" options="alltypes" 
-		              	selected-model="newproduct.types" extra-settings="settings"></div>
+		              <label class="control-label" th:text="#{products.form.types}">Types</label>
+		              <div ng-dropdown-multiselect="" options="alltypes" 
+		              	selected-model="selectedModel" extra-settings="settings"></div>
 		            </div>
-		            <label class="control-label" for="emptyProduct" th:text="#{products.form.empty}">Not available</label>
+		            <label class="control-label" th:text="#{products.form.empty}">Not available</label>
 		            <div class="controls">
 		              <input type="checkbox" id="optionsCheckbox" ng-model="newproduct.empty" value="0" />
 		            </div>
