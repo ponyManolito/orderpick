@@ -22,7 +22,7 @@ public interface ProductOrdersMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addProductOrder(ProductOrder productOrder);
 	
-	@Delete("delete from product_types id_product = #{idProduct}")
+	@Delete("delete from product_types where id_product = #{idProduct}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteByProduct(int idProduct);
 
