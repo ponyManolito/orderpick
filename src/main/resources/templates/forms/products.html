@@ -5,7 +5,7 @@
 		<button type="button" class="btn btn-default" ng-click="add()" th:title="#{products.button.title}">
 			<span ng-class="icon"></span>
 		</button>
-		<div class="row" ng-show=	"viewForm">
+		<div class="row" ng-show="viewForm">
 			<form class="form-horizontal well" enctype="multipart/form-data" name="formProduct">
 		        <fieldset>
 		          <legend th:text="#{products.form.legend}">Product's management</legend>
@@ -18,7 +18,7 @@
 		              		 id="productPrice" th:placeholder="#{products.form.Price}" value="" ng-required="true"/>
 		              <label class="control-label" th:text="#{products.form.types}">Types</label>
 		              <div ng-dropdown-multiselect="" options="alltypes" 
-		              	selected-model="selectedModel" extra-settings="settings"></div>
+		              	selected-model="selectedModel" extra-settings="settings" ></div>
 		            </div>
 		            <label class="control-label" th:text="#{products.form.empty}">Not available</label>
 		            <div class="controls">
@@ -31,7 +31,7 @@
 		            </div>
 		          </div>
 		          <div class="form-group">
-		          	<div ng-file-drop="" ng-file-select="" ng-model="newproduct.image" ng-model-rejected="rejFiles" 
+		            <div ng-file-drop="" ng-file-select="" ng-model="newproduct.image" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
 		          	ng-multiple="false" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
 						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not 	available</div>
@@ -49,7 +49,8 @@
 						<img style="max-width:300px" id="loadImage"/>
 					</div>
 				  </div>
-				  <div class="form-group">
+				  <!--<div class="form-group">
+				  
 					<div ng-file-drop="" ng-file-select="" ng-model="newproduct.movie" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ng-change="showFileName()"
 		          	ng-multiple="false" allow-dir="true" ng-accept="'video/*'" drop-available="dropAvailable">
@@ -61,7 +62,7 @@
 						<div th:text="#{products.movie.name}">Movie name</div>
 						<div>{{newproduct.movie[0].name}}</div>
 					</div>
-		          </div>
+		          </div>-->
 		          <div class="form-actions" >
 		            <button type="button" ng-click="addProduct()" class="btn btn-primary" ng-disabled="formProduct.$invalid"
 		            		 th:text="#{products.form.save}">Save</button>
@@ -72,11 +73,11 @@
 		</div>
 		<div class="form-signin">
 			<span class="alert alert-success" role="alert" 
-						ng-show="messageSuccess" th:text="#{home.operation.success}"/>
+						ng-show="messageSuccess" th:text="#{users.operation.success}"/>
       	</div>
       	<div class="form-signin">
 			<span class="alert alert-danger" role="alert" 
-						ng-show="messageError" th:text="#{home.operation.error}"/>
+						ng-show="messageError" th:text="#{users.operation.error}"/>
       	</div>
 		<div class="row">
 			<div class="col-xs-4">

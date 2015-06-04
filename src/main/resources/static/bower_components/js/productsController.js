@@ -32,22 +32,24 @@ homeApp.controller('productsController', function($scope, $http) {
     };
     $scope.loadProduct = function(index) {
     	$scope.viewForm = true;
+    	$scope.showImageName = "";
     	$scope.icon = "glyphicon glyphicon-minus";
         $http.get("/products/getproduct?id="+index).success(function(response) {
-    		$scope.aux = response;
-    		$scope.newproduct.id=response.id;
-        	$scope.newproduct.name=response.name;
-        	$scope.newproduct.price=response.price;
-        	$scope.newproduct.description=response.description;
+        	$scope.newproduct = response;
     		if (response.imageData){
     			var preview = document.getElementById('loadImage');
     			preview.src = response.imageData;
     			$scope.showImageName = response.imageName;
     		}
+    		$scope.selectedModel = [];
+    		if ($scope.newproduct.types && $scope.newproduct.types.length>0){
+        		for (i in $scope.newproduct.types){
+        			$scope.selectedModel[i]={id:$scope.newproduct.types[i]};
+    			}
+        	}
     		$scope.messageSuccess = "";
     		$scope.messageError = "";
     	}).error(function(response, status, headers, config){
-    		alert(response.message)
     		$scope.messageSuccess = "";
     		$scope.messageError = "true";
 	    });
@@ -57,6 +59,9 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.icon = "glyphicon glyphicon-plus";
     	var isNewProduct = $scope.newproduct.id==""||$scope.newproduct.id=="0";
     	var fd = new FormData();
+    	if (!isNewProduct){
+    		fd.append('id', $scope.newproduct.id);
+    	}
     	fd.append('name', $scope.newproduct.name);
     	fd.append('price', $scope.newproduct.price);
     	fd.append('description', $scope.newproduct.description);
@@ -81,6 +86,7 @@ homeApp.controller('productsController', function($scope, $http) {
         	$scope.newproduct.name="";
         	$scope.newproduct.price="";
         	$scope.newproduct.description="";
+        	$scope.showImageName = "";
         	$scope.messageSuccess = "true";
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
@@ -94,6 +100,7 @@ homeApp.controller('productsController', function($scope, $http) {
     	$scope.newproduct.name="";
     	$scope.newproduct.price="";
     	$scope.newproduct.description="";
+    	$scope.showImageName = "";
     	$scope.newproduct.image=null;
     	$scope.newproduct.movie=null;
     	$scope.selectedModel = [];
@@ -106,6 +113,7 @@ homeApp.controller('productsController', function($scope, $http) {
     			$scope.products = response;
     		});
         	$scope.messageSuccess = "true";
+        	$scope.showImageName = "";
         	$scope.messageError = "";
     	}).error(function(response, status, headers, config){
     		$scope.messageSuccess = "";
@@ -115,13 +123,13 @@ homeApp.controller('productsController', function($scope, $http) {
     $http.get("/products/getall").success(function(response) {
 		$scope.products = response;
 		$scope.alltypes = [];
-		$scope.selectedModel = [];
 		$http.get("/types/getall").success(function(response) {
 			for (i in response){
 				var type = {id:response[i].id, label:response[i].name};
 				$scope.alltypes[i] = type;
 			}
 			$scope.messageSuccess = "";
+			$scope.showImageName = "";
 			$scope.messageError = "";
 		}).error(function(response, status, headers, config){
 			$scope.messageSuccess = "";

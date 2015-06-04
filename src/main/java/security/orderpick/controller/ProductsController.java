@@ -44,7 +44,8 @@ public class ProductsController {
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@RequestParam(value = "types") List<Integer> types,
 			@RequestParam(value = "movie", required = false) MultipartFile movie) throws IOException {
-		return productDao.addProduct(converter.converterProduct(id, name, description, empty, price, image, movie, types));
+		Product productNew = converter.converterProduct(id, name, description, empty, price, image, movie, types);
+		return id!=null&&!id.isEmpty()?productDao.updateProduct(productNew):productDao.addProduct(productNew);
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT }, value = "/updateproduct", produces = "application/json")
@@ -54,6 +55,7 @@ public class ProductsController {
 
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/deleteproduct/{id}", produces = "application/json")
 	public int deleteProduct(@PathVariable(value = "id") int id) {
+		converter.deleteMedia(productDao.getProduct(id));
 		return productDao.deleteProduct(id);
 	}
 	

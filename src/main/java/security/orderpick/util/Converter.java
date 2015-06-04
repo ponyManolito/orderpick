@@ -77,7 +77,7 @@ public class Converter {
 		getValues();
 		Product productDataModel = new Product();
 		if (!StringUtils.isNullOrEmpty(id)) {
-			productDataModel.setId(Integer.getInteger(id));
+			productDataModel.setId(Integer.parseInt(id));
 		}
 		productDataModel.setDescription(description);
 		productDataModel.setName(name);
@@ -114,15 +114,16 @@ public class Converter {
 		result.setTypes(product.getTypes());
 		if (!StringUtils.isNullOrEmpty(product.getImage())) {
 			File newFile = new File(product.getImage());
-			if (!newFile.exists()) {
+			if (newFile.exists()) {
 				result.setImageName(product.getImage().replaceFirst(url_images, ""));
-				result.setImageData(encodeBased64.encodeFileToBase64Binary(newFile));
+				result.setImageData("data:" + newFile.toURL().openConnection().getContentType()+ ";base64," 
+									+ encodeBased64.encodeFileToBase64Binary(newFile));
 			}
 		}
 
 		if (!StringUtils.isNullOrEmpty(product.getMovie())) {
 			File newFile = new File(product.getMovie());
-			if (!newFile.exists()) {
+			if (newFile.exists()) {
 				result.setMovieName(product.getImage().replaceFirst(url_videos, ""));
 				result.setMovieData(encodeBased64.encodeFileToBase64Binary(newFile));
 			}
@@ -169,6 +170,20 @@ public class Converter {
 		}
 
 		return results;
+	}
+
+	public void deleteMedia(Product product) {
+		
+		if (product!=null && product.getImage()!=null && 
+				!product.getImage().isEmpty()){
+			File newFile = new File(product.getImage());
+			newFile.delete();
+		}
+		if (product!=null && product.getMovie()!=null && 
+				!product.getMovie().isEmpty()){
+			File newFile = new File(product.getMovie());
+			newFile.delete();
+		}
 	}
 
 }
