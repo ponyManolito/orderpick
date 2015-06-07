@@ -6,6 +6,7 @@ homeApp.controller('productsController', function($scope, $http) {
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
 	$scope.showImageName = "";
+	$scope.selectedModel = [];
 	$scope.settings = {enableSearch: true};
 	$scope.$watch('newproduct.image', function () {
 		if ($scope.newproduct && $scope.newproduct.image && $scope.newproduct.image[0]){
@@ -57,11 +58,9 @@ homeApp.controller('productsController', function($scope, $http) {
     $scope.addProduct = function() {
     	$scope.viewForm = false;
     	$scope.icon = "glyphicon glyphicon-plus";
-    	var isNewProduct = $scope.newproduct.id==""||$scope.newproduct.id=="0";
+    	var isNewProduct = $scope.newproduct.id==""||$scope.newproduct.id=="0"||$scope.newproduct.id=== undefined;
     	var fd = new FormData();
-    	if (!isNewProduct){
-    		fd.append('id', $scope.newproduct.id);
-    	}
+    	fd.append('id', isNewProduct?"":$scope.newproduct.id);
     	fd.append('name', $scope.newproduct.name);
     	fd.append('price', $scope.newproduct.price);
     	fd.append('description', $scope.newproduct.description);
