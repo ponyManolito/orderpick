@@ -2,6 +2,7 @@ package security.orderpick.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,9 +116,10 @@ public class Converter {
 		if (!StringUtils.isNullOrEmpty(product.getImage())) {
 			File newFile = new File(product.getImage());
 			if (newFile.exists()) {
+				
 				result.setImageName(product.getImage().replaceFirst(url_images, ""));
-				result.setImageData("data:" + newFile.toURL().openConnection().getContentType()+ ";base64," 
-									+ encodeBased64.encodeFileToBase64Binary(newFile));
+				result.setImageData("data:" + URLConnection.guessContentTypeFromName(product.getImage())
+						+ ";base64," + encodeBased64.encodeFileToBase64Binary(newFile));
 			}
 		}
 
