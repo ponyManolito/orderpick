@@ -40,10 +40,9 @@ public class OrdersController {
 		return orderDao.getAll();
 	}
 
-	@RequestMapping(value = "/insert", produces = "application/json")
-	public int insertOrder(InOrder order, Errors error) throws Exception {
-		int result = 0;
-
+	@MessageMapping("/insert")
+	@SendTo("/topic/orders")
+	public List<OrderView> insertOrder(InOrder order, Errors error) throws Exception {
 		validateOrder(order, error);
 
 		Order newOrder = converter.getOrder(order);
@@ -59,17 +58,14 @@ public class OrdersController {
 				for (ProductInOrder productInOrder : newProductsInOrder) {
 					orderDao.insertProductInOrder(productInOrder);
 				}
-				result = idOrder;
 			}
 
 		}
 
-		return result;
+		return getAllAlive();
 	}
 
-	@MessageMapping("/orders/getalive")
-	@SendTo("/topic/orders")
-	public List<OrderView> getAllAlive() {
+	private List<OrderView> getAllAlive() {
 		return orderDao.getAllAlive();
 	}
 
