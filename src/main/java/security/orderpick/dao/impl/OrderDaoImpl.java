@@ -1,5 +1,6 @@
 package security.orderpick.dao.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,7 +13,6 @@ import security.orderpick.dao.OrderDaoI;
 import security.orderpick.datamodel.Bill;
 import security.orderpick.datamodel.Order;
 import security.orderpick.datamodel.OrderRow;
-
 import security.orderpick.datamodel.OrderType;
 import security.orderpick.datamodel.OrderView;
 import security.orderpick.datamodel.ProductInOrder;
@@ -41,8 +41,20 @@ public class OrderDaoImpl implements OrderDaoI {
 	@Override
 	public Bill getBill(int id) {
 		Bill bill = new Bill();
-		List<OrderRow> lOrder =	orderMapper.getBill(id);
-		bill.setItems(lOrder);
+		bill.setId(1);
+		bill.setTable("1");
+		List<OrderRow> lr = new LinkedList<OrderRow>();
+		OrderRow order = new OrderRow();
+		order.setId(1);
+		order.setName("cerve");
+		order.setPrice("2");
+		order.setQuantity("2");
+		order.setTotalItemPrice("4");
+		lr.add(order);
+		bill.setItems(lr);
+		bill.setTotalItemPrice("5");
+//		List<OrderRow> lOrder =	orderMapper.getBill(id);
+//		bill.setItems(lOrder);
 		return bill;
 	}
 	
