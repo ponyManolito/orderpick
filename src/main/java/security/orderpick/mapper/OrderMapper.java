@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import security.orderpick.datamodel.Order;
+import security.orderpick.datamodel.OrderRow;
 
 @Component(OrderMapper.name)
 public interface OrderMapper {
@@ -29,4 +30,11 @@ public interface OrderMapper {
 			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
 			@Result(property = "reg_date", column = "REG_DATE") })
 	List<Order> getAllAlive();
+	
+	@Select("SELECT a.name, a.price, b.quantity , a.price * b.quantity totalItemPrice FROM orderit.cf_products a, orderit.orders_products b, orderit.cf_tables c WHERE c.id = b.id_product AND b.id_product = a.id AND c.id = #{id}")
+	@Results(value = { @Result(property = "id", column = "ID"),
+			@Result(property = "name", column = "NAME"),
+			@Result(property = "precio", column = "PRECIO"),
+			@Result(property = "producto", column = "AVAILABLE") })
+	public List<OrderRow> getBill(int id);
 }

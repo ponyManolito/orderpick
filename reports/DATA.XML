@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<bill>
+	<mesa>Mesa 1
+		<pedidos>
+			<producto>Cerveza</producto>
+			<precioUnidad>5</precioUnidad>
+			<cantidad>3</cantidad>
+			<precioTotalProducto>15</precioTotalProducto>
+		</pedidos>
+		<pedidos>	
+			<producto>Coca-Cola</producto>
+			<precioUnidad>3</precioUnidad>
+			<cantidad>2</cantidad>
+			<precioTotalProducto>6</precioTotalProducto>
+		</pedidos>
+		<precioTotalMesa>21</precioTotalMesa>
+	</mesa>
+</bill>

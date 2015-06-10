@@ -4,7 +4,7 @@
 	<div ng-controller="ordersControl" class="center-div">
 		<div class="panel panel-default">
 	        <div class="panel-body">
-	          <table class="table table-striped">
+	          <table class="table table-striped" id="orderTable">
 	            <thead>
 	              <tr>
 	                <th class="col-md-1" th:text="#{orders.table.id}">ID</th>
@@ -21,6 +21,11 @@
 				      <td>{{order.order_type}}</td>
 				      <td>{{order.status}}</td>
 				      <td>{{order.reg_date}}</td>
+				      <td>
+				      	<button type="button" class="btn btn-default" ng-click="getBill(order.id)" th:title="#{tables.bill.title}">
+							<span class="glyphicon glyphicon-euro"></span>
+						</button>
+					</td>
 				  </tr>
 	            </tbody>
 	          </table>

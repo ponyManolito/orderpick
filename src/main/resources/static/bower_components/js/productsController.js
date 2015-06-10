@@ -15,7 +15,7 @@ homeApp.controller('productsController', function($scope, $http) {
     $scope.loadProduct = function(index) {
     	$scope.viewForm = true;
     	$scope.icon = "glyphicon glyphicon-minus";
-        $http.get("/productss/getproduct?id="+index).success(function(response) {
+        $http.get("/products/getproduct?id="+index).success(function(response) {
     		$scope.newproduct = response;
     	});
     };

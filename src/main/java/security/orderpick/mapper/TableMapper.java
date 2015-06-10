@@ -53,4 +53,5 @@ public interface TableMapper {
 	@Delete("delete from cf_tables where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteTable(int id);
+	
 }

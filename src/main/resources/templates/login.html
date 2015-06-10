@@ -1,35 +1,65 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" language="es">
-    <head>
-        <title>Pick your order</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    	<link rel="stylesheet" media="all"  
-    	href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
-    	th:href="@{/static/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
-    	<link rel="stylesheet" media="all"  
-    	href="../static/bower_components/css/main.css"
-    	th:href="@{/static/bower_components/css/main.css}" />
-    </head>
-    <body>
- 
-		<div class="container">	
-	      <form name="loginForm" class="form-signin" th:action="@{/login}" method="post">
-	        <h2 class="form-signin-heading" th:text="#{login.sign.in}">Please sign in</h2>
-	        <label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
-	        <input type="text" name="username" class="form-control" th:placeholder="#{login.user.name}"></input>
-	        <label for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
-	        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"></input>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit" 
-	        	th:text="#{login.button.signin}">Sign in</button>
-	      </form>
-		  <div class="form-signin">
-      	  	<span class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{login.error}">Invalid username and password</span>
-      	  </div>
-      	  <div class="form-signin">
-      	  	<span class="alert alert-success" role="alert" th:if="${param.logout}" th:text="#{login.logout}">You have been logged out</span>
-      	  </div>	
-        </div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	language="es" ng-app="homeApp" >
+<head>
+<title>Pick your order</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" media="all"
+	href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	th:href="@{/static/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
+<link rel="stylesheet" media="all"
+	href="../static/bower_components/css/main.css"
+	th:href="@{/static/bower_components/css/main.css}" />
+ <script src="../static/bower_components/angular/angular.min.js"
+			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
+		<script src="../static/bower_components/js/homeController.js"
+			data-th-href="@{/static/bower_components/js/homeController.js}"></script>
+		<script src="../static/bower_components/js/ordersController.js"
+			data-th-href="@{/static/bower_components/js/ordersController.js}"></script>
+		<script src="../static/bower_components/js/usersController.js"
+			data-th-href="@{/static/bower_components/js/usersController.js}"></script>
+		<script src="../static/bower_components/js/productsController.js"
+			data-th-href="@{/static/bower_components/js/productsController.js}"></script>
+		<script src="../static/bower_components/js/turnsController.js"
+			data-th-href="@{/static/bower_components/js/turnsController.js}"></script>
+		<script src="../static/bower_components/js/tablesController.js"
+			data-th-href="@{/static/bower_components/js/tablesController.js}"></script>
+		<script src="../static/bower_components/ng-file-upload/angular-file-upload-shim.min.js"
+			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload-shim.min.js}"></script>
+		<script src="../static/bower_components/ng-file-upload/angular-file-upload.min.js"
+			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload.min.js}"></script>
+		<script
+			src="../static/bower_components/angular-utils-pagination/dirPagination.js"
+			data-th-href="@{/static/bower_components/angular-utils-pagination/dirPagination.js}"></script>
+</head>
+<body>
+
+	<div class="container" ng-controller="homeController">
+		<form name="loginForm" class="form-signin" th:action="@{/login}"
+			method="post">
+			<h2 class="form-signin-heading" th:text="#{login.sign.in}">Please
+				sign in</h2>
+			<label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
+			<input type="text" name="username" class="form-control"
+				th:placeholder="#{login.user.name}"></input> <label
+				for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
+			<input type="password" name="password" class="form-control"
+				th:placeholder="#{login.user.password}"></input>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"
+				name="loga" th:text="#{login.button.signin}">Sign in</button>
+		</form>
+		<div class="form-signin">
+			<span class="alert alert-danger" role="alert" th:if="${param.error}"
+				th:text="#{login.error}">Invalid username and password</span>
+		</div>
+		<div class="form-signin">
+			<span class="alert alert-success" role="alert"
+				th:if="${param.logout}" th:text="#{login.logout}">You have
+				been logged out</span>
+		</div>
+	</div>
+</body>
 </html>

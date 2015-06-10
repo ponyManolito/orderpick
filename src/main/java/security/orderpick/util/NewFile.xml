@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bill>
+	<id>0</id>
+	<reg_date>2015-06-02T19:56:15.443+02:00</reg_date>
+	<items>
+		<id>0</id>
+		<reg_date>2015-06-02T19:56:16.161+02:00</reg_date>
+		<name>Cerveza</name>
+		<price>3</price>
+		<quantity>5</quantity>
+		<totalItemPrice>15</totalItemPrice>
+	</items>
+</bill>

@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import security.orderpick.dao.OrderDaoI;
+import security.orderpick.datamodel.Bill;
 import security.orderpick.datamodel.Order;
+import security.orderpick.datamodel.OrderRow;
 import security.orderpick.mapper.OrderMapper;
 
 @Component(OrderDaoImpl.name)
@@ -32,5 +34,12 @@ public class OrderDaoImpl implements OrderDaoI {
 	@SendTo("/topic/orders")
 	public List<Order> getAllAlive() {
 		return orderMapper.getAllAlive();
+	}
+	@Override
+	public Bill getBill(int id) {
+		Bill bill = new Bill();
+		List<OrderRow> lOrder =	orderMapper.getBill(id);
+		bill.setItems(lOrder);
+		return bill;
 	}
 }
