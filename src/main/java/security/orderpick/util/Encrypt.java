@@ -1,7 +1,5 @@
 package security.orderpick.util;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -9,9 +7,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -76,8 +72,9 @@ public class Encrypt {
 	 * 
 	 * @param str String to be encrypted
 	 * @return <code>String</code> Encrypted version of the provided String
+	 * @throws Exception
 	 */
-	public String encrypt(String str) {
+	public String encrypt(String str) throws Exception {
 		try {
 			// Encode the string into bytes using utf-8
 			byte[] utf8 = str.getBytes("UTF8");
@@ -88,8 +85,9 @@ public class Encrypt {
 			// Encode bytes to base64 to get a string
 			return new sun.misc.BASE64Encoder().encode(enc);
 
-		} catch (BadPaddingException e) {} catch (IllegalBlockSizeException e) {} catch (UnsupportedEncodingException e) {} catch (IOException e) {}
-		return null;
+		} catch (Exception e) {
+			throw new Exception("Problem encrypting");
+		}
 	}
 
 	/**
@@ -97,8 +95,9 @@ public class Encrypt {
 	 * 
 	 * @param str Encrypted String to be decrypted
 	 * @return <code>String</code> Decrypted version of the provided String
+	 * @throws Exception
 	 */
-	public String decrypt(String str) {
+	public String decrypt(String str) throws Exception {
 
 		try {
 
@@ -111,8 +110,9 @@ public class Encrypt {
 			// Decode using utf-8
 			return new String(utf8, "UTF8");
 
-		} catch (BadPaddingException e) {} catch (IllegalBlockSizeException e) {} catch (UnsupportedEncodingException e) {} catch (IOException e) {}
-		return null;
+		} catch (Exception e) {
+			throw new Exception("Problem encrypting");
+		}
 	}
 
 }

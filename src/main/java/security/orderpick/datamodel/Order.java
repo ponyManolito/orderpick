@@ -4,46 +4,40 @@ import java.util.Date;
 
 import security.orderpick.datamodel.common.Entity;
 
-public class Order extends Entity{
-	
-	public String name;
-	public String order_type;
-	public String status;
-	
-	public Order(){}
-	
-	public Order(String name, String order_type, String status) {
+public class Order extends Entity {
+
+	public int idTable;
+
+	public String description;
+
+	public Order() {}
+
+	public Order(int id, int idTable, String description, Date regTime) {
 		super();
-		this.name = name;
-		this.order_type = order_type;
-		this.status = status;
-	}
-	
-	public Order(int id, String name, String order_type, String status, Date reg_date) {
 		setId(id);
-		this.name = name;
-		this.order_type = order_type;
-		this.status = status;
-		setReg_date(reg_date);
+		this.idTable = idTable;
+		this.description = description;
+		setReg_date(regTime);
 	}
 
-	public String getName() {
-		return name;
+	public int getIdTable() {
+		return idTable;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setIdTable(int idTable) {
+		this.idTable = idTable;
 	}
-	public String getOrder_type() {
-		return order_type;
+
+	public String getDescription() {
+		return description;
 	}
-	public void setOrder_type(String order_type) {
-		this.order_type = order_type;
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getStatus() {
-		return status;
+
+	public boolean isNew() {
+		return getId() == 0;
 	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
+
 }

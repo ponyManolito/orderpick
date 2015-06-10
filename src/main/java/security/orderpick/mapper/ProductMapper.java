@@ -22,7 +22,7 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE") })
 	public Product getProduct(int id);
 
 	@Insert("insert into cf_products (name, description, image, movie, empty, price) "
@@ -34,7 +34,7 @@ public interface ProductMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
-			@Result(property = "price", column = "PRICE"),@Result(property = "reg_date", column = "REG_DATE") })
+			@Result(property = "price", column = "PRICE") })
 	public List<Product> getAll();
 
 	@Update("update cf_products set name=#{name}, description=#{description}, "
@@ -45,4 +45,16 @@ public interface ProductMapper {
 	@Delete("delete from cf_products where id=#{id}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteProduct(int id);
+	
+	@Select("SELECT * FROM cf_products "
+		+ "WHERE id in "
+		+ "(SELECT id_product FROM product_types "
+		+ "WHERE id_type in "
+		+ "(SELECT id FROM cf_types "
+		+ "WHERE name = #{type}))")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
+			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
+			@Result(property = "price", column = "PRICE") })
+	public List<Product> getAllProductsByType(String type);
 }

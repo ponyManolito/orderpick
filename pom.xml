@@ -87,12 +87,16 @@
             <artifactId>jaxb-api</artifactId>
             <version>2.2</version>
         </dependency>
-
   		 <dependency>
   		 	<groupId>org.springframework.boot</groupId>
   		 	<artifactId>spring-boot-starter-batch</artifactId>
   		 </dependency>
-	</dependencies>
+  		 <dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j-cypher-compiler-2.1</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+   </dependencies>
 
 	<properties>
 		<java.version>1.7</java.version>

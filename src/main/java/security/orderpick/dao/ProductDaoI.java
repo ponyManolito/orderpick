@@ -15,4 +15,6 @@ public interface ProductDaoI {
 	public int updateProduct(Product product);
 
 	public int deleteProduct(int id);
+	
+	public List<Product> getAllProductsByType(String type);
 }

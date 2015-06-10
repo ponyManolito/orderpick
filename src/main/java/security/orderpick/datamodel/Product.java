@@ -1,5 +1,7 @@
 package security.orderpick.datamodel;
 
+import java.util.List;
+
 import security.orderpick.datamodel.common.Entity;
 
 public class Product extends Entity {
@@ -9,17 +11,19 @@ public class Product extends Entity {
 	private String description;
 
 	private String image;
-	
+
 	private double price;
 
 	private String movie;
 
 	private boolean empty;
+	
+	private List<Integer> types;
 
 	public Product() {}
 
-	public Product(String name, String description, String image, double price, 
-				   String movie, boolean empty) {
+	public Product(String name, String description, String image, double price, String movie,
+			boolean empty, List<Integer> types) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -27,6 +31,7 @@ public class Product extends Entity {
 		this.movie = movie;
 		this.empty = empty;
 		this.price = price;
+		this.types = types;
 	}
 
 	public String getName() {
@@ -68,13 +73,21 @@ public class Product extends Entity {
 	public void setEmpty(boolean empty) {
 		this.empty = empty;
 	}
-	
+
 	public double getPrice() {
 		return price;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public List<Integer> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Integer> types) {
+		this.types = types;
 	}
 
 	public boolean isNewProduct() {

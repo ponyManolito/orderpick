@@ -1,4 +1,4 @@
-var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination','angularFileUpload']);
+var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination','angularFileUpload','angularjs-dropdown-multiselect']);
 homeApp.controller('homeController', function($scope, $http) {
 	$scope.iconHomePlus = "glyphicon glyphicon-plus";
 	$scope.viewConf = false;
@@ -20,10 +20,11 @@ homeApp.controller('homeController', function($scope, $http) {
     	$scope.tabs[index] = "active";
     	switch (index) {
 			case 0:$scope.view = "/viewusers";break;
-			case 1:$scope.view = "/viewproducts";break;
-			case 2:$scope.view = "/viewturns";break;
-			case 3:$scope.view = "/viewtables";break;
-			case 4:$scope.view = "/viewpaymentsdata";break;
+			case 1:$scope.view = "/viewtypes";break;
+			case 2:$scope.view = "/viewproducts";break;
+			case 3:$scope.view = "/viewturns";break;
+			case 4:$scope.view = "/viewtables";break;
+			case 5:$scope.view = "/viewpaymentsdata";break;
 			default:$scope.view = "/viewusers";break;
 		}
     };

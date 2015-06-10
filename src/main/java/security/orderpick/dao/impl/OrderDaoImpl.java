@@ -7,12 +7,15 @@ import javax.annotation.Resource;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import security.orderpick.dao.OrderDaoI;
 import security.orderpick.datamodel.Bill;
 import security.orderpick.datamodel.Order;
 import security.orderpick.datamodel.OrderRow;
+
+import security.orderpick.datamodel.OrderType;
+import security.orderpick.datamodel.OrderView;
+import security.orderpick.datamodel.ProductInOrder;
 import security.orderpick.mapper.OrderMapper;
 
 @Component(OrderDaoImpl.name)
@@ -24,22 +27,38 @@ public class OrderDaoImpl implements OrderDaoI {
 	private OrderMapper orderMapper;
 
 	@Override
-	@RequestMapping(value = "/getall", produces = "application/json")
-	public List<Order> getAll() {
+	public List<OrderView> getAll() {
 		return orderMapper.getAll();
 	}
 
 	@Override
 	@MessageMapping("/orders/getalive")
 	@SendTo("/topic/orders")
-	public List<Order> getAllAlive() {
+	public List<OrderView> getAllAlive() {
 		return orderMapper.getAllAlive();
 	}
+	
 	@Override
 	public Bill getBill(int id) {
 		Bill bill = new Bill();
 		List<OrderRow> lOrder =	orderMapper.getBill(id);
 		bill.setItems(lOrder);
 		return bill;
+	}
+	
+	@Override
+	public int insertOrder(Order order) {
+		return order.isNew() ? orderMapper.addOrder(order) : orderMapper.updateOrder(order);
+	}
+
+	@Override
+	public int insertOrderType(OrderType orderType) {
+		return orderType.isNew() ? orderMapper.addOrderType(orderType) : orderMapper.updateOrderType(orderType);
+	}
+
+	@Override
+	public int insertProductInOrder(ProductInOrder productInOrder) {
+		return productInOrder.isNew() ? orderMapper.addProductInOrder(productInOrder) : orderMapper
+				.updateProductInOrder(productInOrder);
 	}
 }
