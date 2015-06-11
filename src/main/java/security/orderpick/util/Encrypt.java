@@ -14,10 +14,11 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component(Encrypt.name)
-public class Encrypt {
+public class Encrypt implements PasswordEncoder {
 
 	public static final String name = "encrypt";
 
@@ -113,6 +114,18 @@ public class Encrypt {
 		} catch (Exception e) {
 			throw new Exception("Problem encrypting");
 		}
+	}
+
+	@Override
+	public String encode(CharSequence rawPassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

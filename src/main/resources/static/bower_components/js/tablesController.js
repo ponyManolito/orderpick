@@ -57,3 +57,9 @@ homeApp.controller('tableController', function($scope, $http) {
 		$scope.tables = response;
 	});
 });
+function tablePagController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
+homeApp.controller('tablePagController', tablePagController);

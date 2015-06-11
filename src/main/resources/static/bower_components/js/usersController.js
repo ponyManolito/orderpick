@@ -69,3 +69,10 @@ homeApp.controller('userController', function($scope, $http) {
 		$scope.messageError = "";
 	});
 });
+
+function userPagController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
+homeApp.controller('userPagController', userPagController);
