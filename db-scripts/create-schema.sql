@@ -92,10 +92,10 @@ CREATE TABLE if not exists orders (
 CREATE TABLE if not exists orders_type (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	id_order INT(8) NOT NULL,
-	id_order_type INT(8) NOT NULL,
+	id_type INT(8) NOT NULL,
 	status VARCHAR(100),
 	CONSTRAINT FOREIGN KEY (id_order) REFERENCES orders(id),
-	CONSTRAINT FOREIGN KEY (id_order_type) REFERENCES cf_types(id)
+	CONSTRAINT FOREIGN KEY (id_type) REFERENCES cf_types(id)
 );
 
 CREATE TABLE if not exists orders_products (

@@ -136,3 +136,9 @@ homeApp.controller('productsController', function($scope, $http) {
 	    });
 	});
 });
+function productPagController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
+homeApp.controller('productPagController', productPagController);

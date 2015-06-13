@@ -9,27 +9,33 @@
     	href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
     	th:href="@{/static/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
     	<link rel="stylesheet" media="all"  
-    	href="../static/bower_components/css/main.css"
-    	th:href="@{/static/bower_components/css/main.css}" />
+    	href="../static/bower_components/css/login.css"
+    	th:href="@{/static/bower_components/css/login.css}" />
     </head>
     <body>
- 
-		<div class="container">	
-	      <form name="loginForm" class="form-signin" th:action="@{/login}" method="post">
-	        <h2 class="form-signin-heading" th:text="#{login.sign.in}">Please sign in</h2>
-	        <label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
-	        <input type="text" name="username" class="form-control" th:placeholder="#{login.user.name}"></input>
-	        <label for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
-	        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"></input>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit" 
-	        	th:text="#{login.button.signin}">Sign in</button>
-	      </form>
-		  <div class="form-signin">
-      	  	<span class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{login.error}">Invalid username and password</span>
-      	  </div>
-      	  <div class="form-signin">
-      	  	<span class="alert alert-success" role="alert" th:if="${param.logout}" th:text="#{login.logout}">You have been logged out</span>
-      	  </div>	
+		<div class='form animated flipInX'>	
+			<h2 th:text="#{login.sign.in}">Please sign in</h2>
+		    <form name="loginForm" class="form-signin" th:action="@{/login}" method="post">
+		    	    
+		        <label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
+		        <input type="text" name="username" class="form-control" th:placeholder="#{login.user.name}"></input>
+		        <label for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
+		        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"
+		        	onchange="encrypt(this)"></input>
+		        <button class='animated infinite pulse' type="submit" 
+		        	th:text="#{login.button.signin}">Sign in</button>
+		    </form>
+		  	<div class="form-signin">
+      	  		<span class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{login.error}">
+      	  		Invalid username and password</span>
+      	  	</div>
+      	  	<div class="form-signin">
+      	  		<span class="alert alert-success" role="alert" th:if="${param.logout}" th:text="#{login.logout}">
+      	  		You have been logged out</span>
+      	  	</div>	
         </div>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+        <script src="../static/bower_components/js/encrypt.js"
+			data-th-href="@{/static/bower_components/js/encrypt.js}"></script>
     </body>
 </html>

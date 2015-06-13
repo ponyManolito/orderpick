@@ -1,29 +1,40 @@
 	<h1 th:text="#{orders.title.main}">
 		Orders 
 	</h1>
-	<div ng-controller="ordersControl" class="center-div">
-		<div class="panel panel-default">
-	        <div class="panel-body">
-	          <table class="table table-striped">
-	            <thead>
-	              <tr>
-	                <th class="col-md-1" th:text="#{orders.table.id}">ID</th>
-	                <th class="col-md-2" th:text="#{orders.table.table}">Table</th>
-	                <th class="col-md-3" th:text="#{orders.table.type}">Type</th>
-	                <th class="col-md-3" th:text="#{orders.table.status}">Status</th>
-	                <th class="col-md-4" th:text="#{orders.table.time}">Time</th>
-	              </tr>
-	            </thead>
-	            <tbody>
-	              <tr ng-repeat="order in orders">
-				      <td>{{order.id}}</td>
-				      <td>{{order.name }}</td>
-				      <td>{{order.order_type}}</td>
-				      <td>{{order.status}}</td>
-				      <td>{{order.reg_date}}</td>
-				  </tr>
-	            </tbody>
-	          </table>
-	        </div>
-	    </div>
+	<div class="panel panel-default" ng-controller="ordersControl">
+		<div class="panel-body">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+		                <th class="col-md-1" th:text="#{orders.table.id}">ID</th>
+		                <th class="col-md-3" th:text="#{orders.table.table}">Table</th>
+		                <th class="col-md-2" th:text="#{orders.table.type}">Type</th>
+		                <th class="col-md-2" th:text="#{orders.table.status}">Status</th>
+		                <th class="col-md-2" th:text="#{orders.table.time}">Time</th>
+		                <th class="col-md-3" th:text="#{users.table.options}">Options</th>
+		              </tr>
+				</thead>
+				<tbody>
+					<tr
+						dir-paginate="order in orders | filter:q | itemsPerPage: pageSize"
+						current-page="currentPage">
+						<td class="col-md-1">{{order.id}}</td>
+						<td class="col-md-3">{{order.name }}</td>
+				      	<td class="col-md-2">{{order.order_type}}</td>
+				      	<td class="col-md-2">{{order.status}}</td>
+				      	<td class="col-md-2">{{order.reg_date}}</td>
+						<th class="col-md-3">
+							<button type="button" class="btn btn-default"
+								ng-click="loadOrder(order.id)" th:title="#{tables.update.title}">
+								<span class="glyphicon glyphicon-floppy-saved"></span>
+							</button>
+							<button type="button" class="btn btn-default"
+								ng-click="payOrder(order.id)" th:title="#{tables.delete.title}">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>

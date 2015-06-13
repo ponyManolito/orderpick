@@ -59,3 +59,9 @@ homeApp.controller('turnController', function($scope, $http) {
 		$scope.turns = response;
 	});
 });
+function turnPagController($scope) {
+  $scope.pageChangeHandler = function(num) {
+    console.log('going to page ' + num);
+  };
+}
+homeApp.controller('turnPagController', turnPagController);

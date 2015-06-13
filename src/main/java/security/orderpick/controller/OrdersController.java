@@ -40,10 +40,10 @@ public class OrdersController {
 		return orderDao.getAll();
 	}
 
-	@RequestMapping(value = "/insert", produces = "application/json")
+	@MessageMapping("/insertorder")
 	public int insertOrder(InOrder order, Errors error) throws Exception {
+		
 		int result = 0;
-
 		validateOrder(order, error);
 
 		Order newOrder = converter.getOrder(order);
@@ -67,9 +67,8 @@ public class OrdersController {
 		return result;
 	}
 
-	@MessageMapping("/orders/getalive")
 	@SendTo("/topic/orders")
-	public List<OrderView> getAllAlive() {
+	private List<OrderView> getAllAlive() {
 		return orderDao.getAllAlive();
 	}
 

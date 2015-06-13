@@ -22,7 +22,7 @@ public interface OrderMapper {
 
 	@Select("SELECT orders.id as ID, cf_tables.name as NAME, cf_types.name as ORDER_TYPE, "
 			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type, cf_types "
-			+ "WHERE cf_types.id=orders_type.id_order_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order")
+			+ "WHERE cf_types.id=orders_type.id_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
 			@Result(property = "reg_date", column = "REG_DATE") })
@@ -30,7 +30,7 @@ public interface OrderMapper {
 	
 	@Select("SELECT orders.id as ID, cf_tables.name as NAME, cf_types.name as ORDER_TYPE, "
 			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type, cf_types "
-			+ "WHERE cf_types.id=orders_type.id_order_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order "
+			+ "WHERE cf_types.id=orders_type.id_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order "
 			+"orders_type.status<>'DELIVERED'")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
@@ -41,11 +41,11 @@ public interface OrderMapper {
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addOrder(Order order);
 
-	@Insert("Insert into orders_type(id_order,id_order_type,status) values(#{idOrder},#{idOrderType},#{status})")
+	@Insert("Insert into orders_type(id_order,id_type,status) values(#{idOrder},#{idOrderType},#{status})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addOrderType(OrderType orderType);
 
-	@Insert("Insert into orders_products(id_order_type,id_product,quantity) values(#{idOrderType},#{idProduct},#{quantity})")
+	@Insert("Insert into orders_products(id_type,id_product,quantity) values(#{idOrderType},#{idProduct},#{quantity})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public int addProductInOrder(ProductInOrder productsInOrder);
 
@@ -53,11 +53,11 @@ public interface OrderMapper {
 	@Options(flushCache = true, useCache = true)
 	public int updateOrder(Order order);
 
-	@Update("Update orders_type set id_order=#{idOrder},order_type=#{orderType},status=#{status} where id=#{id})")
+	@Update("Update orders_type set id_order=#{idOrder},id_type=#{orderType},status=#{status} where id=#{id})")
 	@Options(flushCache = true, useCache = true)
 	public int updateOrderType(OrderType orderType);
 
-	@Update("Update orders_products set id_order_type=#{idOrderType},id_product=#{idProduct},quantity=#{quantity} where id=#{id})")
+	@Update("Update orders_products set id_type=#{idOrderType},id_product=#{idProduct},quantity=#{quantity} where id=#{id})")
 	@Options(flushCache = true, useCache = true)
 	public int updateProductInOrder(ProductInOrder productsInOrder);
 }

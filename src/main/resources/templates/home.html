@@ -43,6 +43,10 @@
 		    <div ng-include="view" ng-show="viewConf"></div>
 		    <div ng-include="'/vieworder'"></div>
 	    </div>
+	    <script src="../static/bower_components/bower-sockjs-client/sockjs.min.js"
+			data-th-href="@{/static/bower_components/bower-sockjs-client/sockjs.min.js}"></script>
+		<script src="../static/bower_components/stomp-websocket/lib/stomp.min.js"
+			data-th-href="@{/static/bower_components/stomp-websocket/lib/stomp.min.js}"></script>
 	    <script src="../static/bower_components/lodash/dist/lodash.min.js"
 			data-th-href="@{/static/bower_components/lodash/dist/lodash.min.js}"></script>
 	    <script src="../static/bower_components/angular/angular.min.js"

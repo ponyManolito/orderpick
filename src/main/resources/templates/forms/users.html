@@ -26,11 +26,11 @@
 		</div>
 		<div class="form-signin">
 			<span class="alert alert-success" role="alert" 
-						ng-show="messageSuccess" th:text="#{home.operation.success}"/>
+						ng-show="messageSuccess" th:text="#{users.operation.success}"/>
       	</div>
       	<div class="form-signin">
 			<span class="alert alert-danger" role="alert" 
-						ng-show="messageError" th:text="#{home.operation.error}"/>
+						ng-show="messageError" th:text="#{users.operation.error}"/>
       	</div>
 		<div class="row">
 			<div class="col-xs-4">
@@ -79,5 +79,11 @@
 					</tbody>
 				</table>
 			</div>
+			<div ng-controller="userPagController" class="other-controller">
+		        <div class="text-center">
+		        	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" 
+		        	template-url="../../bower_components/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+		        </div>
+        	</div>
 		</div>
 	</div>
