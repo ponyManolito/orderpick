@@ -13,14 +13,14 @@
     	th:href="@{/static/bower_components/css/main.css}" />
     </head>
     <body>
- 
 		<div class="container">	
 	      <form name="loginForm" class="form-signin" th:action="@{/login}" method="post">
 	        <h2 class="form-signin-heading" th:text="#{login.sign.in}">Please sign in</h2>
 	        <label for="inputEmail" class="sr-only" th:text="#{login.user.name}">Username</label>
 	        <input type="text" name="username" class="form-control" th:placeholder="#{login.user.name}"></input>
 	        <label for="inputPassword" class="sr-only" th:text="#{login.user.password}">Password</label>
-	        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"></input>
+	        <input type="password" name="password" class="form-control" th:placeholder="#{login.user.password}"
+	        	onchange="encrypt(this)"></input>
 	        <button class="btn btn-lg btn-primary btn-block" type="submit" 
 	        	th:text="#{login.button.signin}">Sign in</button>
 	      </form>
@@ -31,5 +31,8 @@
       	  	<span class="alert alert-success" role="alert" th:if="${param.logout}" th:text="#{login.logout}">You have been logged out</span>
       	  </div>	
         </div>
+        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+        <script src="../static/bower_components/js/encrypt.js"
+			data-th-href="@{/static/bower_components/js/encrypt.js}"></script>
     </body>
 </html>
