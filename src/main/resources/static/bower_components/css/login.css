@@ -26,7 +26,7 @@ body::before {
   top: 50%;
   left: 50%;
   background: #fff;
-  width: 285px;
+  width: 365px;
   margin: -140px 0 0 -182px;
   padding: 40px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
@@ -34,7 +34,7 @@ body::before {
 .form h2 {
   margin: 0 0 20px;
   line-height: 1;
-  color: #2ecc71;
+  color: #FF0015;
   font-size: 18px;
   font-weight: 400;
 }
@@ -62,7 +62,7 @@ body::before {
 }
 .form input:focus {
   color: #333;
-  border: 1px solid #FF0015;
+  border: 1px solid #2ecc71;
 }
 .form button {
   cursor: pointer;

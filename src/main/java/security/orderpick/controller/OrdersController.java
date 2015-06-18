@@ -41,9 +41,9 @@ public class OrdersController {
 	}
 
 	@MessageMapping("/insertorder")
-	public int insertOrder(InOrder order, Errors error) throws Exception {
+	@SendTo("/topic/orders")
+	public List<OrderView> insertOrder(InOrder order, Errors error) throws Exception {
 		
-		int result = 0;
 		validateOrder(order, error);
 
 		Order newOrder = converter.getOrder(order);
@@ -59,19 +59,18 @@ public class OrdersController {
 				for (ProductInOrder productInOrder : newProductsInOrder) {
 					orderDao.insertProductInOrder(productInOrder);
 				}
-				result = idOrder;
 			}
 
 		}
 
-		return result;
-	}
-
-	@SendTo("/topic/orders")
-	private List<OrderView> getAllAlive() {
 		return orderDao.getAllAlive();
 	}
 
+	@RequestMapping(value = "/getallalive", produces = "application/json")
+	public List<OrderView> getAllAlive() {
+		return orderDao.getAllAlive();
+	}
+	
 	private void validateOrder(InOrder order, Errors error) throws Exception {
 		orderValidator.validate(order, error);
 		if (error.hasErrors()) {

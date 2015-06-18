@@ -10,38 +10,80 @@
     	<link rel="stylesheet" media="all"  
 	    	href="../static/bower_components/css/main.css"
 	    	th:href="@{/static/bower_components/css/main.css}" />
+	    <link rel="stylesheet" media="all"  
+	    	href="../static/bower_components/css/custom.css"
+	    	th:href="@{/static/bower_components/css/custom.css}" />
+	    <link rel="stylesheet" media="all"  
+	    	href="../static/bower_components/css/font-awesome.css"
+	    	th:href="@{/static/bower_components/css/font-awesome.css}" />
     </head>
-    <body>
-    	<div class="center-div" ng-controller="homeController">
-    		 <div class="form-group">
-	        	<button type="button" class="btn btn-default" onclick="window.location='/?language=es';">ES</button>
+    <body ng-controller="homeController">
+    	<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bar"></span>
+                    <span class="fa fa-bar"></span>
+                    <span class="fa fa-bar"></span>
+                </button>
+                <a class="navbar-brand">Admin</a> 
+            </div>
+  			<div class="top-bar"> 
+  				<button type="button" class="btn btn-default" onclick="window.location='/?language=es';">ES</button>
 	        	<button type="button" class="btn btn-default" onclick="window.location='/?language=en';">EN</button>
 		        <label th:text="#{home.language}">Language</label>
 	       	 	<span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-		    </div>
-		    <div class="form-group">
-		        <nav class="navbar navbar-default">
-			        <div class="container">
-			          <div class="navbar-collapse collapse">
-			            <ul class="nav navbar-nav">
-			              <li>
-			              	  <button type="button" class="btn btn-default" ng-click="showConf()">
-							  	<span ng-class="iconHomePlus"></span>
-					    	  </button>
-					      </li>
-			              <li ng-class="tabs[0]"><a ng-click="clickTab(0)" th:text="#{home.tab.users}">Conf. users</a></li>
-			              <li ng-class="tabs[1]"><a ng-click="clickTab(1)" th:text="#{home.tab.types}">Conf. types</a></li>
-			              <li ng-class="tabs[2]"><a ng-click="clickTab(2)" th:text="#{home.tab.products}">Conf. products</a></li>
-			              <li ng-class="tabs[3]"><a ng-click="clickTab(3)" th:text="#{home.tab.turns}">Conf. turns</a></li>
-			              <li ng-class="tabs[4]"><a ng-click="clickTab(4)" th:text="#{home.tab.tables}">Conf. tables</a></li>
-			              <li ng-class="tabs[5]"><a ng-click="clickTab(5)" th:text="#{home.tab.payment}">Conf. payment data</a></li>
-			            </ul>
-			          </div><!--/.nav-collapse -->
-			        </div>
-			    </nav>
-		    </div>
-		    <div ng-include="view" ng-show="viewConf"></div>
-		    <div ng-include="'/vieworder'"></div>
+  				<a th:action="@{/logout}" class="btn btn-danger square-btn-adjust">Logout</a> 
+  			</div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse" >
+                <ul class="nav" id="main-menu">
+					<li class="text-center">
+		            	<img src="../static/bower_components/img/find_user.png" class="user-image img-responsive"/>
+					</li>
+					<li>
+	                   	<button type="button" class="btn btn-default" ng-click="showConf()">
+							<span ng-class="iconHomePlus"></span>
+				    	</button>
+	                </li>
+	                <li>
+	                   	<a ng-class="tabs[0]" ng-click="clickTab(0)" th:text="#{home.tab.users}">
+	                   		<i class="fa fa-dashboard fa-3x"></i> Conf. users
+	                   	</a>
+	                </li>
+                    <li>
+                        <a ng-class="tabs[1]" ng-click="clickTab(1)" th:text="#{home.tab.types}">
+                        	<i class="fa fa-desktop fa-3x"></i> Conf. types
+                        </a>
+                   </li>
+                   <li>
+                        <a ng-class="tabs[2]" ng-click="clickTab(2)" th:text="#{home.tab.products}">
+                        	<i class="fa fa-qrcode fa-3x"></i> Conf. products
+                        </a>
+                   </li>
+				   <li>
+                        <a ng-class="tabs[3]" ng-click="clickTab(3)" th:text="#{home.tab.turns}">
+                        	<i class="fa fa-bar-chart-o fa-3x"></i> Conf. turns
+                        </a>
+                   </li>	
+                   <li>
+                        <a ng-class="tabs[4]" ng-click="clickTab(4)" th:text="#{home.tab.tables}">
+                       		<i class="fa fa-table fa-3x"></i> Conf. tables
+                        </a>
+                   </li>
+                   <li>
+                        <a ng-class="tabs[5]" ng-click="clickTab(5)" th:text="#{home.tab.payment}">
+                        	<i class="fa fa-edit fa-3x"></i> Conf. payment data 
+                        </a>
+                   </li>				
+                </ul>
+            </div>
+        </nav> 
+    	<div id="page-wrapper">
+    		<div ng-include="view" ng-show="viewConf"></div>
+    		<div ng-include="'/vieworder'"></div>
 	    </div>
 	    <script src="../static/bower_components/bower-sockjs-client/sockjs.min.js"
 			data-th-href="@{/static/bower_components/bower-sockjs-client/sockjs.min.js}"></script>

@@ -3,7 +3,7 @@ homeApp.controller('homeController', function($scope, $http) {
 	$scope.iconHomePlus = "glyphicon glyphicon-plus";
 	$scope.viewConf = false;
 	$scope.view = "/viewusers";
-	$scope.tabs = ["active","","","",""];
+	$scope.tabs = ["active-menu","","","",""];
 	$scope.showConf = function() {
         $scope.viewConf = !$scope.viewConf;
         if ($scope.viewConf){
@@ -17,7 +17,7 @@ homeApp.controller('homeController', function($scope, $http) {
     	for (i = 0, len = $scope.tabs.length; i < len; ++i) {
     		$scope.tabs[i]="";
     	}
-    	$scope.tabs[index] = "active";
+    	$scope.tabs[index] = "active-menu";
     	switch (index) {
 			case 0:$scope.view = "/viewusers";break;
 			case 1:$scope.view = "/viewtypes";break;

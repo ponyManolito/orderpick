@@ -4,10 +4,13 @@ homeApp.controller('ordersControl', function($scope, $http) {
 	$scope.socket = new SockJS('/insertorder');
 	$scope.stompClient = Stomp.over($scope.socket);
 	$scope.stompClient.connect({}, function() {
-        stompClient.subscribe('/topic/orders', function(result){
+		$scope.stompClient.subscribe('/topic/orders', function(result){
         	$scope.orders = response;
         });
     }, function(error) {
         alert(error)
     });
+	$http.get("/orders/getallalive").success(function(response) {
+		$scope.orders = response;
+	});
 });

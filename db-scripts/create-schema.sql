@@ -24,8 +24,10 @@ CREATE TABLE if not exists authorities (
 );
 
 insert into users(name,password) values("admin","admin");
+insert into users(name,password) values("ivan","jEBLPB2QkAc2RNruvihUvg==");
 insert into roles(name,description) values("ROLE_ADMIN","Role as administrator");
 insert into authorities(id_user,id_role) values((select id from users where name ="admin"),(select id from roles where name ="ROLE_ADMIN"));
+insert into authorities(id_user,id_role) values((select id from users where name ="ivan"),(select id from roles where name ="ROLE_ADMIN"));
 
 CREATE TABLE if not exists cf_parameters (
 	name VARCHAR(60) NOT NULL PRIMARY KEY,
