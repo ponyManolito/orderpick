@@ -33,6 +33,9 @@ public interface UserMapper {
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "password", column = "PASSWORD"), @Result(property = "reg_date", column = "REG_DATE") })
 	public List<User> getAll();
+	
+	@Select("SELECT name FROM roles")
+	public List<String> getAllRoles();
 
 	@Update("update users set name = #{name}, password = #{password} where id = #{id}")
 	@Options(flushCache = true, useCache = true)
@@ -48,4 +51,11 @@ public interface UserMapper {
 	@Delete("delete from authorities where id_role = (select id from roles where name = #{role}) and id_user = #{id}")
 	@Options(flushCache = true, useCache = true)
 	public int deleteRoleAdmin(@Param("id") int id, @Param("role") String role);
-}
+	
+	@Select("SELECT name from roles where id = (SELECT id_role FROM authorities where id_user = (select id from users where name = #{name}))")
+	public String permision(String name);
+	
+	@Update("update authorities set id_role = (select id from roles where name = #{role})) where id_user =(select id from users where name = #{user})")
+	@Options(flushCache = true, useCache = true)
+	public int updateRoleAdmin(UserRole userRole);
+} 

@@ -34,14 +34,13 @@
 		            <div ng-file-drop="" ng-file-select="" ng-model="newproduct.image" ng-model-rejected="rejFiles" 
 		          	drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" 
 		          	ng-multiple="false" allow-dir="true" ng-accept="'image/*'" drop-available="dropAvailable">
-						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not 	available</div>
-						<div ng-show="dropAvailable" th:text="#{products.form.drop}">Drop Images or PDFs</div>
-						<div th:text="#{products.form.click}">click to select</div>
+						<div ng-hide="dropAvailable" th:text="#{products.form.no.drop}">File Drop not available</div>
+						<div ng-show="dropAvailable" th:text="#{products.form.click}">click to select</div>
 					</div>
 					<div ng-show="newproduct.image[0].type.indexOf('image') > -1">
 						<div th:text="#{products.image.name}">Image name</div>
 						<div>{{newproduct.image[0].name}}</div>
-						<img style="max-width:300px" />
+						<img class="imagePreview" style="max-width:300px" />
 					</div>
 					<div ng-show="showImageName">
 						<div th:text="#{products.image.name}">Image name</div>

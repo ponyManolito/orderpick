@@ -23,16 +23,30 @@ public class UserDaoImpl implements UserDaoI {
 	public List<User> getAll() {
 		return userMapper.getAll();
 	}
-
+	
 	@Override
+	public List<String> getAllRoles() {
+		return userMapper.getAllRoles();
+	}
+
+	@Override 
 	public User getUser(int id) {
-		return userMapper.getUser(id);
+		User user = userMapper.getUser(id);
+		user.setProfile(userMapper.permision(user.getName()));
+		return user;
 	}
 
 	@Override
 	public int addUser(User user) {
-		int inserted = user.isNewUser() ? userMapper.addUser(user) : userMapper.updateUser(user);
-		userMapper.addRoleAdmin(new UserRole(user.getName(), "ROLE_ADMIN"));
+		int inserted = 0; 
+		if (user.isNewUser()){
+			inserted = userMapper.addUser(user);
+			userMapper.addRoleAdmin(new UserRole(user.getName(), user.getProfile()));
+		}
+		else{
+			inserted = userMapper.updateUser(user);
+			userMapper.updateRoleAdmin(new UserRole(user.getName(), user.getProfile()));
+		}
 		return inserted;
 	}
 
@@ -43,7 +57,13 @@ public class UserDaoImpl implements UserDaoI {
 
 	@Override
 	public int deleteUser(int id) {
-		userMapper.deleteRoleAdmin(id, "ROLE_ADMIN");
+		User user = userMapper.getUser(id);
+		userMapper.deleteRoleAdmin(id, userMapper.permision(user.getName()));
 		return userMapper.deleteUser(id);
+	}
+
+	@Override
+	public String permision(String name) {
+		return userMapper.permision(name);
 	}
 }

@@ -4,7 +4,8 @@ CREATE TABLE if not exists users (
 	id INT(8) AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(60) NOT NULL,
 	password VARCHAR(100) NOT NULL,
-	reg_date TIMESTAMP
+	reg_date TIMESTAMP,
+	UNIQUE KEY `name_UNIQUE` (`name`)
 );
 
 CREATE TABLE if not exists roles (
@@ -25,9 +26,12 @@ CREATE TABLE if not exists authorities (
 
 insert into users(name,password) values("admin","admin");
 insert into users(name,password) values("ivan","jEBLPB2QkAc2RNruvihUvg==");
+insert into users(name,password) values("camarero","eIr3VqddTLaoUfiabs9E0A==");
 insert into roles(name,description) values("ROLE_ADMIN","Role as administrator");
+insert into roles(name,description) values("ROLE_WORKER","Role as worker");
 insert into authorities(id_user,id_role) values((select id from users where name ="admin"),(select id from roles where name ="ROLE_ADMIN"));
 insert into authorities(id_user,id_role) values((select id from users where name ="ivan"),(select id from roles where name ="ROLE_ADMIN"));
+insert into authorities(id_user,id_role) values((select id from users where name ="camarero"),(select id from roles where name ="ROLE_WORKER"));
 
 CREATE TABLE if not exists cf_parameters (
 	name VARCHAR(60) NOT NULL PRIMARY KEY,

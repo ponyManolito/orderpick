@@ -38,7 +38,7 @@ public class UsersController {
 		}
 		return result;
 	}
-
+	
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getuser", produces = "application/json")
 	public User getUser(@RequestParam(value = "id") int id) throws Exception {
 		User user = userDao.getUser(id);
@@ -61,5 +61,10 @@ public class UsersController {
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/deleteuser/{id}", produces = "application/json")
 	public int deleteUser(@PathVariable(value = "id") int id) {
 		return userDao.deleteUser(id);
+	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/permision", produces = "application/json")
+	public String permision(@RequestParam(value = "name") String name) throws Exception {
+		return userDao.permision(name);
 	}
 }

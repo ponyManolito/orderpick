@@ -9,17 +9,21 @@ public class User extends Entity{
 	
 	private String name;
 	private String password;
+	private String profile;
 	public User() {}
-	public User(String name, String password) {
+	public User(String name, String password,String profile) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.profile = profile;
 	}
 	
-	public User(int id, String name, String password, Date reg_date) {
+	public User(int id, String name, String password, String profile, 
+			Date reg_date) {
 		setId(id);
 		this.name = name;
 		this.password = password;
+		this.profile = profile;
 		setReg_date(reg_date);
 	}
 	
@@ -34,6 +38,12 @@ public class User extends Entity{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	public boolean isNewUser(){
 		return getId()==0;

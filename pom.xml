@@ -81,6 +81,16 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.hazelcast</groupId>
+		    <artifactId>hazelcast</artifactId>
+		    <version>3.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hazelcast</groupId>
+		    <artifactId>hazelcast-spring</artifactId>
+		    <version>3.5</version>
+		</dependency>
    </dependencies>
 
    <properties>

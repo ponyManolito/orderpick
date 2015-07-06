@@ -26,14 +26,14 @@
                     <span class="fa fa-bar"></span>
                     <span class="fa fa-bar"></span>
                 </button>
-                <a class="navbar-brand">Admin</a> 
+                <a class="navbar-brand"><label th:inline="text">[[${#httpServletRequest.remoteUser}]]</label></a> 
             </div>
   			<div class="top-bar"> 
   				<button type="button" class="btn btn-default" onclick="window.location='/?language=es';">ES</button>
 	        	<button type="button" class="btn btn-default" onclick="window.location='/?language=en';">EN</button>
 		        <label th:text="#{home.language}">Language</label>
 	       	 	<span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-  				<a th:action="@{/logout}" class="btn btn-danger square-btn-adjust">Logout</a> 
+  				<a th:href="@{/logout}" class="btn btn-danger square-btn-adjust">Logout</a> 
   			</div>
         </nav>
         <!-- /. NAV TOP  -->

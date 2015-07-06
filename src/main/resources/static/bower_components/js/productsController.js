@@ -14,7 +14,7 @@ homeApp.controller('productsController', function($scope, $http) {
 			$scope.showImage = "";
 			$scope.showImageName = "";
 			reader.onloadend = function () {
-				var preview = document.querySelector('img');
+				var preview = document.querySelector('.imagePreview');
 				preview.src = reader.result;
 			}
         	reader.readAsDataURL($scope.newproduct.image[0]);

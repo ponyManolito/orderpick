@@ -7,6 +7,8 @@ import security.orderpick.datamodel.User;
 public interface UserDaoI {
 
 	public List<User> getAll();
+	
+	public List<String> getAllRoles();
 
 	public User getUser(int id);
 
@@ -15,4 +17,6 @@ public interface UserDaoI {
 	public int updateUser(User user);
 
 	public int deleteUser(int id);
+
+	public String permision(String name);
 }

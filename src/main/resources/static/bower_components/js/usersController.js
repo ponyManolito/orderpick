@@ -5,6 +5,7 @@ homeApp.controller('userController', function($scope, $http) {
 	$scope.pageSize = 5;
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
+	$scope.settings = {selectionLimit: 1};
 	$scope.add = function() {
         $scope.viewForm = !$scope.viewForm;
         if ($scope.viewForm){
@@ -21,6 +22,7 @@ homeApp.controller('userController', function($scope, $http) {
     	$scope.icon = "glyphicon glyphicon-minus";
         $http.get("/users/getuser?id="+index).success(function(response) {
     		$scope.newuser = response;
+    		$scope.selectedModel={id:$scope.newuser.profile};
     		$scope.messageSuccess = "";
     		$scope.messageError = "";
     	});
@@ -67,6 +69,9 @@ homeApp.controller('userController', function($scope, $http) {
 		$scope.users = response;
 		$scope.messageSuccess = "";
 		$scope.messageError = "";
+		$scope.alltypes = [];
+		$scope.alltypes[0] = {id:"ROLE_ADMIN", label:"Admin"};
+		$scope.alltypes[1] = {id:"ROLE_WORKER", label:"Camarero"};
 	});
 });
 
