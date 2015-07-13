@@ -50,4 +50,9 @@ public class OrderDaoImpl implements OrderDaoI {
 		return productInOrder.isNew() ? orderMapper.addProductInOrder(productInOrder) : orderMapper
 				.updateProductInOrder(productInOrder);
 	}
+
+	@Override
+	public List<OrderView> getAllByStatus(List<String> status) {
+		return orderMapper.getAllByStatus((String[]) status.toArray());
+	}
 }

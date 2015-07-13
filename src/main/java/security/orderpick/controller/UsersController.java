@@ -3,6 +3,9 @@ package security.orderpick.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import javax.xml.ws.handler.MessageContext;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import security.orderpick.config.Constants;
 import security.orderpick.dao.UserDaoI;
 import security.orderpick.dao.impl.UserDaoImpl;
 import security.orderpick.datamodel.User;
@@ -25,12 +29,17 @@ public class UsersController {
 
 	@Resource(name = Encrypt.name)
 	private Encrypt encrypt;
+	
+	// add the attribute to your implementation
+	@Context 
+	private MessageContext context;
 
 	@RequestMapping(method = { RequestMethod.GET }, value = "/getall", produces = "application/json")
 	public List<User> getAll() throws Exception {
 		List<User> result = userDao.getAll();
 		for (User user : result) {
 			try {
+				user.setProfile(userDao.permision(user.getName()));
 				user.setPassword(encrypt.decrypt(user.getPassword()));
 			} catch (Exception e) {
 
@@ -63,8 +72,9 @@ public class UsersController {
 		return userDao.deleteUser(id);
 	}
 	
-	@RequestMapping(method = { RequestMethod.GET }, value = "/permision", produces = "application/json")
-	public String permision(@RequestParam(value = "name") String name) throws Exception {
-		return userDao.permision(name);
+	@RequestMapping(method = { RequestMethod.GET }, value = "/isadmin", produces = "application/json")
+	public boolean isadmin(HttpServletRequest request) throws Exception {
+		String name = request.getRemoteUser();
+		return userDao.permision(name).equals(Constants.ROLE_ADMIN);
 	}
 }

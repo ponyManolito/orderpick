@@ -2,8 +2,12 @@ var homeApp = angular.module('homeApp', ['angularUtils.directives.dirPagination'
 homeApp.controller('homeController', function($scope, $http) {
 	$scope.iconHomePlus = "glyphicon glyphicon-plus";
 	$scope.viewConf = false;
+	$scope.viewSettings = false;
 	$scope.view = "/viewusers";
 	$scope.tabs = ["active-menu","","","",""];
+	$http.get("/users/isadmin").success(function(response) {
+		$scope.viewSettings = response;
+	});
 	$scope.showConf = function() {
         $scope.viewConf = !$scope.viewConf;
         if ($scope.viewConf){

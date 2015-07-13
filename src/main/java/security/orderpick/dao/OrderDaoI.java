@@ -13,9 +13,11 @@ public interface OrderDaoI {
 
 	public List<OrderView> getAllAlive();
 
-	public int insertOrder(Order order);
+	public int insertOrder(Order order);		
 
 	public int insertOrderType(OrderType orderType);
 
 	public int insertProductInOrder(ProductInOrder productInOrder);
+
+	public List<OrderView> getAllByStatus(List<String> status);
 }

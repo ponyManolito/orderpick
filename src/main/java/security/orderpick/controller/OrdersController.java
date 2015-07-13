@@ -66,6 +66,11 @@ public class OrdersController {
 		return orderDao.getAllAlive();
 	}
 
+	@RequestMapping(value = "/getallbystatus", produces = "application/json")
+	public List<OrderView> getAllByStatus(List<String> status) {
+		return orderDao.getAllByStatus(status);
+	}
+	
 	@RequestMapping(value = "/getallalive", produces = "application/json")
 	public List<OrderView> getAllAlive() {
 		return orderDao.getAllAlive();

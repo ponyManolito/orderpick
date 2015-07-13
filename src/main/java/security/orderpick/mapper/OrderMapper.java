@@ -60,4 +60,13 @@ public interface OrderMapper {
 	@Update("Update orders_products set id_type=#{idOrderType},id_product=#{idProduct},quantity=#{quantity} where id=#{id})")
 	@Options(flushCache = true, useCache = true)
 	public int updateProductInOrder(ProductInOrder productsInOrder);
+	
+	@Select("SELECT orders.id as ID, cf_tables.name as NAME, cf_types.name as ORDER_TYPE, "
+			+ "orders_type.status as STATUS, orders.reg_date as REG_DATE FROM cf_tables,orders,orders_type, cf_types "
+			+ "WHERE cf_types.id=orders_type.id_type AND cf_tables.id = orders.id_table AND orders.id = orders_type.id_order "
+			+"orders_type.status in IN (#{status})")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "order_type", column = "ORDER_TYPE"), @Result(property = "status", column = "STATUS"),
+			@Result(property = "reg_date", column = "REG_DATE") })
+	public List<OrderView> getAllByStatus(String[] status);
 }

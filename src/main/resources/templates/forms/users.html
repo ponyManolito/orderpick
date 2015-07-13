@@ -33,6 +33,10 @@
       	<div class="form-signin">
 			<span class="alert alert-danger" role="alert" 
 						ng-show="messageError" th:text="#{users.operation.error}"/>
+			<span class="alert alert-danger" role="alert" 
+						ng-show="duplicatedError" th:text="#{users.operation.duplicated}"/>
+			<span class="alert alert-danger" role="alert" 
+						ng-show="profileError" th:text="#{users.missing.profile}"/>			
       	</div>
 		<div class="row">
 			<div class="col-xs-4">
@@ -56,7 +60,8 @@
 						<tr>
 							<th class="col-md-1" th:text="#{users.table.id}">ID</th>
 							<th class="col-md-4" th:text="#{users.table.name}">Name</th>
-							<th class="col-md-4" th:text="#{users.table.password}">Password</th>
+							<th class="col-md-2" th:text="#{users.table.password}">Password</th>
+							<th class="col-md-3" th:text="#{users.table.profile}">Profile</th>
 							<th class="col-md-2" th:text="#{users.table.options}">Options</th>
 						</tr>
 					</thead>
@@ -66,7 +71,8 @@
 							current-page="currentPage">
 							<td class="col-md-1">{{user.id}}</td>
 							<td class="col-md-4">{{user.name}}</td>
-							<td class="col-md-4">*******</td>
+							<td class="col-md-2">*******</td>
+							<td class="col-md-3">{{user.profile}}</td>
 							<th class="col-md-2">
 								<button type="button" class="btn btn-default"
 									ng-click="loadUser(user.id)" th:title="#{users.update.title}">

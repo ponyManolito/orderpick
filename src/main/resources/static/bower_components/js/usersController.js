@@ -6,6 +6,8 @@ homeApp.controller('userController', function($scope, $http) {
 	$scope.messageSuccess = "";
 	$scope.messageError = "";
 	$scope.settings = {selectionLimit: 1};
+	$scope.alltypes = [];
+	$scope.selectedModel = [];
 	$scope.add = function() {
         $scope.viewForm = !$scope.viewForm;
         if ($scope.viewForm){
@@ -31,20 +33,30 @@ homeApp.controller('userController', function($scope, $http) {
     	$scope.viewForm = false;
     	$scope.icon = "glyphicon glyphicon-plus";
     	var isNewUser = $scope.newuser.id==""||$scope.newuser.id=="0";
-        $http.post("/users/adduser",$scope.newuser).success(function(response) {
-    		$http.get("/users/getall").success(function(response) {
-    			$scope.users = response;
-    		});
-    		$scope.newuser.id="";
-        	$scope.newuser.name="";
-        	$scope.newuser.password="";
-        	$scope.messageSuccess = 'true';
-        	$scope.messageError = "";
-    	}).error(function(response, status, headers, config){
-    		alert(response.message);
-    		$scope.messageSuccess = "";
-        	$scope.messageError = "true";
-	    });
+    	$scope.duplicatedError ="";
+    	$scope.profileError ="";
+    	if ($scope.selectedModel==null ||($scope.selectedModel!=null &&$scope.selectedModel.id="")){
+    		$scope.profileError = "yes";
+    	}
+    	$http.get("/users/getuser?id="+index).success(function(response) {
+    		$scope.duplicatedError = response.id;
+    	});
+    	if ($scope.duplicatedError !="" && $scope.profileError !=""){
+	        $http.post("/users/adduser",$scope.newuser).success(function(response) {
+	    		$http.get("/users/getall").success(function(response) {
+	    			$scope.users = response;
+	    		});
+	    		$scope.newuser.id="";
+	        	$scope.newuser.name="";
+	        	$scope.newuser.password="";
+	        	$scope.messageSuccess = 'true';
+	        	$scope.messageError = "";
+	    	}).error(function(response, status, headers, config){
+	    		alert(response.message);
+	    		$scope.messageSuccess = "";
+	        	$scope.messageError = "true";
+		    });
+    	}
     };
     $scope.reset = function() {
     	$scope.newuser.id="";
@@ -69,7 +81,6 @@ homeApp.controller('userController', function($scope, $http) {
 		$scope.users = response;
 		$scope.messageSuccess = "";
 		$scope.messageError = "";
-		$scope.alltypes = [];
 		$scope.alltypes[0] = {id:"ROLE_ADMIN", label:"Admin"};
 		$scope.alltypes[1] = {id:"ROLE_WORKER", label:"Camarero"};
 	});
