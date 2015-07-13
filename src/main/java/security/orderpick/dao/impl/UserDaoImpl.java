@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import security.orderpick.dao.UserDaoI;
 import security.orderpick.datamodel.User;
@@ -37,6 +38,7 @@ public class UserDaoImpl implements UserDaoI {
 	}
 
 	@Override
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public int addUser(User user) {
 		int inserted = 0; 
 		if (user.isNewUser()){
@@ -51,11 +53,13 @@ public class UserDaoImpl implements UserDaoI {
 	}
 
 	@Override
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public int updateUser(User user) {
 		return userMapper.updateUser(user);
 	}
 
 	@Override
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public int deleteUser(int id) {
 		User user = userMapper.getUser(id);
 		userMapper.deleteRoleAdmin(id, userMapper.permision(user.getName()));
@@ -65,5 +69,10 @@ public class UserDaoImpl implements UserDaoI {
 	@Override
 	public String permision(String name) {
 		return userMapper.permision(name);
+	}
+
+	@Override
+	public User getUserByName(String name) {
+		return userMapper.getUserByName(name);
 	}
 }

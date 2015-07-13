@@ -77,4 +77,9 @@ public class UsersController {
 		String name = request.getRemoteUser();
 		return userDao.permision(name).equals(Constants.ROLE_ADMIN);
 	}
+	
+	@RequestMapping(method = { RequestMethod.GET }, value = "/getusername", produces = "application/json")
+	public boolean getUsername(@RequestParam(value = "name") String name) throws Exception {
+		return userDao.getUserByName(name)!=null;
+	}
 }

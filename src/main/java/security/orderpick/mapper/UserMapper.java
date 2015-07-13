@@ -58,4 +58,7 @@ public interface UserMapper {
 	@Update("update authorities set id_role = (select id from roles where name = #{role})) where id_user =(select id from users where name = #{user})")
 	@Options(flushCache = true, useCache = true)
 	public int updateRoleAdmin(UserRole userRole);
+	
+	@Select("SELECT * FROM users WHERE name = #{name}")
+	public User getUserByName(String name);
 } 

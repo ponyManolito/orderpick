@@ -35,13 +35,16 @@ homeApp.controller('userController', function($scope, $http) {
     	var isNewUser = $scope.newuser.id==""||$scope.newuser.id=="0";
     	$scope.duplicatedError ="";
     	$scope.profileError ="";
-    	if ($scope.selectedModel==null ||($scope.selectedModel!=null &&$scope.selectedModel.id="")){
+    	if ($scope.selectedModel==null ||($scope.selectedModel!=null 
+    			&&$scope.selectedModel.id =="")){
     		$scope.profileError = "yes";
     	}
-    	$http.get("/users/getuser?id="+index).success(function(response) {
-    		$scope.duplicatedError = response.id;
+    	$scope.newuser.profile = $scope.selectedModel.id;
+    	var name =$scope.newuser.name+"";
+    	$http.get("/users/getusername?name="+name).success(function(response) {
+    		$scope.duplicatedError = response.id==true?"Error":"";
     	});
-    	if ($scope.duplicatedError !="" && $scope.profileError !=""){
+    	if ($scope.duplicatedError =="" && $scope.profileError ==""){
 	        $http.post("/users/adduser",$scope.newuser).success(function(response) {
 	    		$http.get("/users/getall").success(function(response) {
 	    			$scope.users = response;

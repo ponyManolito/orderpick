@@ -11,6 +11,8 @@ public interface UserDaoI {
 	public List<String> getAllRoles();
 
 	public User getUser(int id);
+	
+	public User getUserByName(String name);
 
 	public int addUser(User user);
 
