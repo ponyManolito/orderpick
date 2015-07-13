@@ -14,13 +14,13 @@ import com.hazelcast.core.HazelcastInstance;
 @ComponentScan
 @SpringBootApplication
 @ImportResource({ "classpath:hazelcast-config.xml" })
-public class Application{
-	
+public class Application {
+
 	@Bean
 	public HazelcastInstance hazelcast() throws Exception {
 		return Hazelcast.newHazelcastInstance();
 	}
-	
+
     public static void main(String[] args) throws Throwable {
         SpringApplication.run(Application.class, args);
     }
