@@ -17,4 +17,6 @@ public interface ProductDaoI {
 	public int deleteProduct(int id);
 	
 	public List<Product> getAllProductsByType(String type);
+	
+	public List<Product> getAllProductsInMenuByTypes(String[] types);
 }

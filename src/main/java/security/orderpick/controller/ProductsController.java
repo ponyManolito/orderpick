@@ -63,4 +63,9 @@ public class ProductsController {
 	public List<Product> getAllProductsByType(@RequestParam(value = "type") String type) {
 		return productDao.getAllProductsByType(type);
 	}
+	
+	@RequestMapping(value = "/getallproductsinmenubytypes", produces = "application/json")
+	public List<Product> getAllProductsInMenuByTypes(String[] types) {
+		return productDao.getAllProductsInMenuByTypes(types);
+	}
 }

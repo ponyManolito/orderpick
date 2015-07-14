@@ -80,4 +80,16 @@ public class ProductDaoImpl implements ProductDaoI {
 		
 		return products;
 	}
+	
+	@Override
+	public List<Product> getAllProductsInMenuByTypes(String[] types) {
+		List<Product> products = productMapper.getAllProductsInMenuByTypes(types);
+		
+		for (Product product:products){
+			List<Integer> listTypes = productOrdersMapper.getOrdersByProduct(product.getId());
+			product.setTypes(listTypes);
+		}
+		
+		return products;
+	}
 }

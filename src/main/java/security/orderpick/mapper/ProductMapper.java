@@ -57,4 +57,15 @@ public interface ProductMapper {
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
 			@Result(property = "price", column = "PRICE") })
 	public List<Product> getAllProductsByType(String type);
+	
+	@Select("SELECT cf_products.id, cf_products.name, cf_products.description,cf_products.image,cf_products.movie,cf_products.empty,cf_products.price "
+			+ "FROM product_types,cf_types,cf_products where product_types.id_product = cf_products.id "
+			+ "AND product_types.id_type = cf_types.id AND cf_types.name in (#{types}) "
+			+ "GROUP BY product_types.id_product "
+			+ "HAVING COUNT(*) > 1")
+	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
+			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
+			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
+			@Result(property = "price", column = "PRICE") })
+	public List<Product> getAllProductsInMenuByTypes(String[] types);
 }
