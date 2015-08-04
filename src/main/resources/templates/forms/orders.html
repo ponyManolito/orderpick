@@ -16,7 +16,7 @@
 				</thead>
 				<tbody>
 					<tr
-						dir-paginate="order in orders | filter:q | itemsPerPage: pageSize"
+						dir-paginate="order in orders | filter:q  | itemsPerPage: pageSize"
 						current-page="currentPage">
 						<td class="col-md-1">{{order.id}}</td>
 						<td class="col-md-3">{{order.name }}</td>
@@ -26,7 +26,7 @@
 						<th class="col-md-3">
 							<button type="button" class="btn btn-default"
 								ng-click="loadOrder(order.id)" th:title="#{tables.update.title}">
-								<span class="glyphicon glyphicon-floppy-saved"></span>
+								<img ng-src="{{imageProfile}}" class="user-image img-responsive"/>
 							</button>
 							<button type="button" class="btn btn-default"
 								ng-click="payOrder(order.id)" th:title="#{tables.delete.title}">

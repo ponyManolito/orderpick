@@ -5,9 +5,13 @@ homeApp.controller('homeController', function($scope, $http) {
 	$scope.viewSettings = false;
 	$scope.view = "/viewusers";
 	$scope.tabs = ["active-menu","","","",""];
+	$scope.imageProfile = "../static/bower_components/img/";
 	$http.get("/users/isadmin").success(function(response) {
 		$scope.viewSettings = response;
-	});
+		$scope.imageProfile +=response?"user_admin.png":"find_user.png";
+	}).error(function(response, status, headers, config){
+		alert(response.message);
+    });
 	$scope.showConf = function() {
         $scope.viewConf = !$scope.viewConf;
         if ($scope.viewConf){
