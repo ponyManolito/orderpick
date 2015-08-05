@@ -60,12 +60,13 @@ public interface ProductMapper {
 	
 	@Select("SELECT cf_products.id, cf_products.name, cf_products.description,cf_products.image,cf_products.movie,cf_products.empty,cf_products.price "
 			+ "FROM product_types,cf_types,cf_products where product_types.id_product = cf_products.id "
-			+ "AND product_types.id_type = cf_types.id AND cf_types.name in (#{types}) "
+			+ "AND product_types.id_type = cf_types.id AND FIND_IN_SET(cf_types.name, #{types}) <> 0 "
 			+ "GROUP BY product_types.id_product "
 			+ "HAVING COUNT(*) > 1")
+			// "HAVING COUNT(*) > 1" comprobation added because the course that appears on the MENU OF THE DAY must have at least 2 types (For instance: "MENU" and "FIRST")
 	@Results(value = { @Result(property = "id", column = "ID"), @Result(property = "name", column = "NAME"),
 			@Result(property = "description", column = "DESCRIPTION"), @Result(property = "image", column = "IMAGE"),
 			@Result(property = "movie", column = "MOVIE"), @Result(property = "empty", column = "EMPTY"),
 			@Result(property = "price", column = "PRICE") })
-	public List<Product> getAllProductsInMenuByTypes(String[] types);
+	public List<Product> getAllProductsInMenuByTypes(String types);
 }

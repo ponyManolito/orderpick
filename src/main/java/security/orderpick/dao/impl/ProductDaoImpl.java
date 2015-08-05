@@ -82,7 +82,7 @@ public class ProductDaoImpl implements ProductDaoI {
 	}
 	
 	@Override
-	public List<Product> getAllProductsInMenuByTypes(String[] types) {
+	public List<Product> getAllProductsInMenuByTypes(String types) {
 		List<Product> products = productMapper.getAllProductsInMenuByTypes(types);
 		
 		for (Product product:products){

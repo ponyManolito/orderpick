@@ -18,5 +18,5 @@ public interface ProductDaoI {
 	
 	public List<Product> getAllProductsByType(String type);
 	
-	public List<Product> getAllProductsInMenuByTypes(String[] types);
+	public List<Product> getAllProductsInMenuByTypes(String types);
 }
