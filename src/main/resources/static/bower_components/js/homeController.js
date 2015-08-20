@@ -3,10 +3,10 @@ homeApp.controller('homeController', function($scope, $http) {
 	$scope.iconHomePlus = "glyphicon glyphicon-plus";
 	$scope.viewConf = false;
 	$scope.viewSettings = false;
-	$scope.view = "/viewusers";
+	$scope.view = "/orderserver/viewusers";
 	$scope.tabs = ["active-menu","","","",""];
-	$scope.imageProfile = "../static/bower_components/img/";
-	$http.get("/users/isadmin").success(function(response) {
+	$scope.imageProfile = "../orderserver/static/bower_components/img/";
+	$http.get("/orderserver/users/isadmin").success(function(response) {
 		$scope.viewSettings = response;
 		$scope.imageProfile +=response?"user_admin.png":"find_user.png";
 	}).error(function(response, status, headers, config){
@@ -27,13 +27,13 @@ homeApp.controller('homeController', function($scope, $http) {
     	}
     	$scope.tabs[index] = "active-menu";
     	switch (index) {
-			case 0:$scope.view = "/viewusers";break;
-			case 1:$scope.view = "/viewtypes";break;
-			case 2:$scope.view = "/viewproducts";break;
-			case 3:$scope.view = "/viewturns";break;
-			case 4:$scope.view = "/viewtables";break;
-			case 5:$scope.view = "/viewpaymentsdata";break;
-			default:$scope.view = "/viewusers";break;
+			case 0:$scope.view = "/orderserver/viewusers";break;
+			case 1:$scope.view = "/orderserver/viewtypes";break;
+			case 2:$scope.view = "/orderserver/viewproducts";break;
+			case 3:$scope.view = "/orderserver/viewturns";break;
+			case 4:$scope.view = "/orderserver/viewtables";break;
+			case 5:$scope.view = "/orderserver/viewpaymentsdata";break;
+			default:$scope.view = "/orderserver/viewusers";break;
 		}
     };
 });

@@ -83,38 +83,38 @@
         </nav> 
     	<div id="page-wrapper">
     		<div ng-include="view" ng-show="viewConf"></div>
-    		<div ng-include="'/vieworder'"></div>
+    		<div ng-include="'/orderserver/vieworder'"></div>
 	    </div>
 	    <script src="../static/bower_components/bower-sockjs-client/sockjs.min.js"
-			data-th-href="@{/static/bower_components/bower-sockjs-client/sockjs.min.js}"></script>
+			th:src="@{/static/bower_components/bower-sockjs-client/sockjs.min.js}"></script>
 		<script src="../static/bower_components/stomp-websocket/lib/stomp.min.js"
-			data-th-href="@{/static/bower_components/stomp-websocket/lib/stomp.min.js}"></script>
+			th:src="@{/static/bower_components/stomp-websocket/lib/stomp.min.js}"></script>
 	    <script src="../static/bower_components/lodash/dist/lodash.min.js"
-			data-th-href="@{/static/bower_components/lodash/dist/lodash.min.js}"></script>
+			th:src="@{/static/bower_components/lodash/dist/lodash.min.js}"></script>
 	    <script src="../static/bower_components/angular/angular.min.js"
-			data-th-href="@{/static/bower_components/angular/angular.min.js}"></script>
+			th:src="@{/static/bower_components/angular/angular.min.js}"></script>
 		<script src="../static/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"
-			data-th-href="@{/static/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js}"></script>
+			th:src="@{/static/bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js}"></script>
 		<script src="../static/bower_components/js/homeController.js"
-			data-th-href="@{/static/bower_components/js/homeController.js}"></script>
+			th:src="@{/static/bower_components/js/homeController.js}"></script>
 		<script src="../static/bower_components/js/ordersController.js"
-			data-th-href="@{/static/bower_components/js/ordersController.js}"></script>
+			th:src="@{/static/bower_components/js/ordersController.js}"></script>
 		<script src="../static/bower_components/js/usersController.js"
-			data-th-href="@{/static/bower_components/js/usersController.js}"></script>
+			th:src="@{/static/bower_components/js/usersController.js}"></script>
 		<script src="../static/bower_components/js/productsController.js"
-			data-th-href="@{/static/bower_components/js/productsController.js}"></script>
+			th:src="@{/static/bower_components/js/productsController.js}"></script>
 		<script src="../static/bower_components/js/turnsController.js"
-			data-th-href="@{/static/bower_components/js/turnsController.js}"></script>
+			th:src="@{/static/bower_components/js/turnsController.js}"></script>
 		<script src="../static/bower_components/js/tablesController.js"
-			data-th-href="@{/static/bower_components/js/tablesController.js}"></script>
+			th:src="@{/static/bower_components/js/tablesController.js}"></script>
 		<script src="../static/bower_components/js/typesController.js"
-			data-th-href="@{/static/bower_components/js/typesController.js}"></script>
+			th:src="@{/static/bower_components/js/typesController.js}"></script>
 		<script src="../static/bower_components/ng-file-upload/angular-file-upload-shim.min.js"
-			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload-shim.min.js}"></script>
+			th:src="@{/static/bower_components/ng-file-upload/angular-file-upload-shim.min.js}"></script>
 		<script src="../static/bower_components/ng-file-upload/angular-file-upload.min.js"
-			data-th-href="@{/static/bower_components/ng-file-upload/angular-file-upload.min.js}"></script>
+			th:src="@{/static/bower_components/ng-file-upload/angular-file-upload.min.js}"></script>
 		<script
 			src="../static/bower_components/angular-utils-pagination/dirPagination.js"
-			data-th-href="@{/static/bower_components/angular-utils-pagination/dirPagination.js}"></script>
+			th:src="@{/static/bower_components/angular-utils-pagination/dirPagination.js}"></script>
     </body>
 </html>

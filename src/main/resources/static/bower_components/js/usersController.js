@@ -22,7 +22,7 @@ homeApp.controller('userController', function($scope, $http) {
     $scope.loadUser = function(index) {
     	$scope.viewForm = true;
     	$scope.icon = "glyphicon glyphicon-minus";
-        $http.get("/users/getuser?id="+index).success(function(response) {
+        $http.get("/orderserver/users/getuser?id="+index).success(function(response) {
     		$scope.newuser = response;
     		$scope.selectedModel={id:$scope.newuser.profile};
     		$scope.messageSuccess = "";
@@ -41,12 +41,12 @@ homeApp.controller('userController', function($scope, $http) {
     	}
     	$scope.newuser.profile = $scope.selectedModel.id;
     	var name =$scope.newuser.name+"";
-    	$http.get("/users/getusername?name="+name).success(function(response) {
+    	$http.get("/orderserver/users/getusername?name="+name).success(function(response) {
     		$scope.duplicatedError = response.id==true?"Error":"";
     	});
     	if ($scope.duplicatedError =="" && $scope.profileError ==""){
-	        $http.post("/users/adduser",$scope.newuser).success(function(response) {
-	    		$http.get("/users/getall").success(function(response) {
+	        $http.post("/orderserver/users/adduser",$scope.newuser).success(function(response) {
+	    		$http.get("/orderserver/users/getall").success(function(response) {
 	    			$scope.users = response;
 	    		});
 	    		$scope.newuser.id="";
@@ -69,8 +69,8 @@ homeApp.controller('userController', function($scope, $http) {
 		$scope.messageError = "";
     }
     $scope.deleteUser = function(index) {
-        $http.delete("/users/deleteuser/"+index).success(function(response) {
-        	$http.get("/users/getall").success(function(response) {
+        $http.delete("/orderserver/users/deleteuser/"+index).success(function(response) {
+        	$http.get("/orderserver/users/getall").success(function(response) {
     			$scope.users = response;
     		});
         	$scope.messageSuccess = "true";
@@ -80,7 +80,7 @@ homeApp.controller('userController', function($scope, $http) {
     		$scope.messageError = "true";
 	    });
     };
-	$http.get("/users/getall").success(function(response) {
+	$http.get("/orderserver/users/getall").success(function(response) {
 		$scope.users = response;
 		$scope.messageSuccess = "";
 		$scope.messageError = "";
